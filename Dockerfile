@@ -12,14 +12,15 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 COPY pnpm-lock*.yaml ./
+RUN npm install -g pnpm
 
 COPY . /usr/src/app/
-RUN npm install --legacy-peer-deps
-RUN npm run build:production
+RUN pnpm install --shamefully-hoist
+RUN pnpm run build:production
 
 EXPOSE 5000
 
 ENV NUXT_HOST=0.0.0.0
 ENV PORT=5000
 
-CMD [ "npm", "start:production" ]
+CMD [ "pnpm", "start:production" ]
