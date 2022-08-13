@@ -10,6 +10,12 @@ export default defineNuxtConfig({
         // "@nuxtjs/partytown"
     ],
 
+    buildModules: [
+        ["@nuxt-modules/compression", {
+            algorithm: "brotliCompress"
+        }]
+    ],
+
     components: true,
 
     ssr: true,
@@ -71,5 +77,5 @@ export default defineNuxtConfig({
                 }
             ],
         },
-    },
+    }
 })
