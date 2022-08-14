@@ -64,7 +64,10 @@ export default {
         subtitle: {
           url: source.subtitle,
           type: "vtt",
-          encoding: "UTF-8"
+          encoding: "UTF-8",
+          style: {
+            "font-size": "30px",
+          }
         }
       }),
       customType: {

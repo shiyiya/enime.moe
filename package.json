@@ -28,7 +28,7 @@
     "@nuxtjs/supabase": "^0.1.19",
     "@pinia/nuxt": "^0.3.0",
     "artplayer": "^4.5.4",
-    "hls.js": "^1.2.0",
+    "hls.js": "0.14.7",
     "lit": "^2.3.0",
     "pinia": "^2.0.16",
     "ufo": "^0.8.5",
