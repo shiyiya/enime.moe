@@ -1,7 +1,7 @@
 <template>
   <div class="cont relative my-20 items-stretch" v-if="episode">
     <div class="episode">
-      <Player v-if="!!sources" :anime="anime" :source="sources[0]" class="relative w-full aspect-video mb-8" />
+      <Player v-if="!!sources" :episode="episode" :anime="anime" :source="sources[0]" class="relative w-full aspect-video mb-8" />
       <div v-else>
         Loading player
       </div>
@@ -52,7 +52,7 @@ if (error.value || !episode.value) {
   throw createError({ statusCode: 404, message: "Episode not found" })
 }
 
-const { id, number, anime, title, sources, image, createdAt } = episode.value;
+const { id, description, number, anime, title, sources, image, createdAt } = episode.value;
 
 const animeeps = anime.episodes.sort((a, b) => a.number - b.number);
 const preferredTitle = anime.title.userPreferred || anime.title.english || anime.title.romaji;
@@ -78,7 +78,7 @@ useHead({
     },
     {
       name: "og:description",
-      content: `Watch ${preferredTitle} Episode ${number}${title ? ` - ${title}` : ""} online on Enime - An ad-free and VPN-free anime site built with performance in mind.`
+      content: `Watch ${preferredTitle} Episode ${number}${title ? ` - ${title}` : ""} online on Enime ${description ? ` - ${description}` : ""}`
     },
     {
       name: "twitter:card",

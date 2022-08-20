@@ -36,6 +36,7 @@ export default {
     };
   },
   props: {
+    episode: Object,
     source: {
       id: String
     },
@@ -58,7 +59,7 @@ export default {
       ...this.option,
       url: source.url,
       container: this.$refs.artRef,
-      poster: this.anime.bannerImage || this.anime.coverImage,
+      poster: this.episode.image || this.anime.bannerImage || this.anime.coverImage,
       autoMini: true,
       ...(source.subtitle && {
         subtitle: {
@@ -114,7 +115,7 @@ export default {
             position: "right",
             html: "Auto",
             width: 200,
-            selector: [...this.instance.hls.levels.filter(item => item.height !== 0).map((item, _) => {
+            selector: [...this.instance.hls.levels.filter(item => item.height && item.height !== 0).map((item, _) => {
               return {
                 html: item.height + 'P',
                 level: _
