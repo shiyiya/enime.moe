@@ -23,7 +23,7 @@
 
   const runtimeConfig = useRuntimeConfig();
   // https://stackoverflow.com/a/42769683/10013227
-  function convertRemToPixels(rem: number) {
+  function convertRemToPixels(rem: number): number {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
   }
 
@@ -68,9 +68,9 @@
       return;
     }
 
-    if (eps.scrollLeft + eps.clientWidth >= eps.scrollWidth) {
+    if (eps.scrollLeft + eps.clientWidth >= eps.scrollWidth - window.innerWidth) {
       page.value++;
-      eps.scrollLeft = eps.scrollWidth;
+      // eps.scrollLeft = eps.scrollWidth;
     }
   }
 </script>

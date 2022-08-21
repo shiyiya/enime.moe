@@ -109,13 +109,13 @@ export default {
 
     const instance = this.instance;
 
-    this.instance.on("ready", () => {
-      this.instance.controls.add(
+    instance.on("ready", () => {
+      instance.controls.add(
           {
             position: "right",
             html: "Auto",
             width: 200,
-            selector: [...this.instance.hls.levels.filter(item => item.height && item.height !== 0).map((item, _) => {
+            selector: [...instance.hls.levels.filter(item => item.height && item.height !== 0).map((item, _) => {
               return {
                 html: item.height + 'P',
                 level: _
@@ -166,6 +166,20 @@ export default {
             }
           }
       )
+
+      if(localStorage.getItem('artplayer-volume-' + window.location.pathname))
+        instance.volume = localStorage.getItem('artplayer-volume-' + window.location.pathname);
+      if (localStorage.getItem('artplayer-curtime-' + window.location.pathname)) instance.currentTime = localStorage.getItem('artplayer-curtime-' + window.location.pathname)
+
+      const settime = () => {
+        localStorage.setItem('artplayer-curtime-' + window.location.pathname, instance.currentTime);
+      };
+      let int = setInterval(settime, 5000);
+      instance.on("pause", () => clearInterval(int))
+      .on("play", () => { settime(); int = setInterval(settime, 5000); })
+      .on("destroy", () => clearInterval(int))
+      .on("seek", () => { settime(); clearInterval(int); int = setInterval(settime, 5000); })
+      .on("volume", () => { localStorage.setItem('artplayer-volume-' + window.location.pathname, instance.volume); })
     });
   },
   beforeUnmount() {

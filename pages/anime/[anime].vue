@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFetch, navigateTo, useRoute, useRuntimeConfig, useHead } from '#app';
+  import { useFetch, navigateTo, useRoute, useRuntimeConfig, useHead } from '#app';
   import { createError } from 'h3';
 
   const runtimeConfig = useRuntimeConfig();
