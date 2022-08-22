@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@nuxtjs/partytown": "^1.2.1",
+    "@types/hls.js": "^1.0.0",
     "@vueuse/core": "^8.9.4",
     "@vueuse/nuxt": "^8.9.4",
     "cross-env": "^7.0.3",

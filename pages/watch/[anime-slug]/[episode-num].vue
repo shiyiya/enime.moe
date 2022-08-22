@@ -1,7 +1,7 @@
 <template>
   <div class="cont relative my-20 items-stretch" v-if="episode">
     <div class="episode">
-      <Player v-if="!!sources" :episode="episode" :anime="anime" :source="sources[0]" class="relative w-full aspect-video mb-8" />
+      <Player v-if="!!sources" :episode="episode" :anime="anime" :sources="sources" class="relative w-full aspect-video mb-8" />
       <div v-else>
         Loading player
       </div>
