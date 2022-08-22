@@ -30,7 +30,8 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
-            enimeApi: "https://api.enime.moe"
+            enimeApi: "https://api.enime.moe",
+            production: !!process.env.PRODUCTION
         }
     },
 

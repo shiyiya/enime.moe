@@ -26,12 +26,12 @@
           </div>
           <p class="gray-text">ENIME.MOE is not affiliated with or endorsed by any of the anime studios behind
             the creation
-            of the anime presented on this site. This website is only a user interface presenting/linking various
+            of the anime presented on this site. This website is only an user interface presenting/linking various
             self-hosted
             files
             across the internet by other third-party providers for easy access.
             <br />
-            © ENIME.MOE 2022 | Built with <a href="https://github.com/Enime-Project/api.enime.moe" class="text-tertiary">Enime API</a>
+            © ENIME.MOE {{ new Date().getFullYear() }} | Built with <a href="https://github.com/Enime-Project/api.enime.moe" target="_blank" class="text-tertiary">Enime API</a>
           </p>
         </div>
         <div class="flex-1 flex items-center justify-end">

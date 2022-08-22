@@ -5,10 +5,11 @@
 <script setup lang="ts">
 import Artplayer from 'artplayer';
 import Hls from 'hls.js';
-import { useFetch } from '#app';
+import { useFetch, useRuntimeConfig } from '#app';
 import { nextTick, onBeforeUnmount, ref } from 'vue';
 import { onMounted } from '#imports';
 
+const runtimeConfig = useRuntimeConfig();
 const emits = defineEmits(["get-instance"]);
 
 const props = defineProps({
@@ -44,10 +45,10 @@ const options = {
   poster: props.episode.image || props.anime.bannerImage || props.anime.coverImage,
 }
 
-let currentSourceIndex = 0;
-let source = props.sources[currentSourceIndex];
+let currentSourceIndex = ref(0);
+let source = props.sources[currentSourceIndex.value];
 
-let { data: sourceRef } = await useFetch(`https://api.enime.moe/source/${source.id}`, {
+let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/source/${source.id}`, {
   key: `source-${source.id}`
 });
 
@@ -81,6 +82,25 @@ onMounted(() => {
           art.hls = new Hls({
             debug: false
           });
+          art.hls.on("hlsError", async () => {
+            if (currentSourceIndex.value < props.sources.length) {
+              currentSourceIndex.value++;
+              source = props.sources[currentSourceIndex.value];
+
+              let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/source/${source.id}`, {
+                key: `source-${source.id}`
+              });
+
+              if (sourceRef.value.subtitle) await art.subtitle.switch(sourceRef.value.subtitle, {
+                type: "vtt",
+                encoding: "UTF-8",
+                style: {
+                  "font-size": "30px",
+                }
+              })
+              await art.switchUrl(sourceRef.value.url)
+            }
+          });
           art.hls.loadSource(url);
           art.hls.attachMedia(video);
         } else {
@@ -99,28 +119,6 @@ onMounted(() => {
 
   nextTick(() => {
     emits("get-instance", instance);
-  });
-
-  instance.on("video:error", async () => {
-    if (currentSourceIndex<props.sources.length) {
-      currentSourceIndex++;
-      source = props.sources[currentSourceIndex];
-
-      let { data: sourceRef } = await useFetch(`https://api.enime.moe/source/${source.id}`, {
-        key: `source-${source.id}`
-      });
-
-      instance.subtitle = {
-        url: sourceRef.value.subtitle,
-        type: "vtt",
-        encoding: "UTF-8",
-        style: {
-          "font-size": "30px",
-        }
-      }
-
-      await instance.switchUrl(sourceRef.value.url)
-    }
   });
 
   instance.on("destroy", () => {
