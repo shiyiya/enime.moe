@@ -7,6 +7,7 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "nuxt-storm",
         "@nuxtjs/supabase",
+        "@nuxtjs/device"
         // "@nuxtjs/partytown"
     ],
 

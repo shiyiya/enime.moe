@@ -9,6 +9,7 @@ overrides:
 
 specifiers:
   '@nuxt-modules/compression': ^0.1.0
+  '@nuxtjs/device': github:Redemption198/device-module#master
   '@nuxtjs/partytown': ^1.2.1
   '@nuxtjs/supabase': ^0.1.19
   '@pinia/nuxt': ^0.3.0
@@ -33,6 +34,7 @@ specifiers:
 
 dependencies:
   '@nuxt-modules/compression': 0.1.0
+  '@nuxtjs/device': github.com/Redemption198/device-module/d6d0b9253b1b81e8ae6f9ae99e32d95982126473
   '@nuxtjs/supabase': 0.1.19
   '@pinia/nuxt': 0.3.1_vue@3.2.37
   artplayer: 4.5.4
@@ -5563,3 +5565,18 @@ packages:
       compress-commons: 4.1.1
       readable-stream: 3.6.0
     dev: true
+
+  github.com/Redemption198/device-module/d6d0b9253b1b81e8ae6f9ae99e32d95982126473:
+    resolution: {tarball: https://codeload.github.com/Redemption198/device-module/tar.gz/d6d0b9253b1b81e8ae6f9ae99e32d95982126473}
+    name: '@nuxtjs/device'
+    version: 3.0.0
+    dependencies:
+      '@nuxt/kit': 3.0.0-rc.6
+      defu: 6.0.0
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - supports-color
+      - vite
+      - webpack
+    dev: false

@@ -5,12 +5,13 @@
 <script setup lang="ts">
 import Artplayer from 'artplayer';
 import Hls from 'hls.js';
-import { useFetch, useRuntimeConfig } from '#app';
+import { useFetch, useNuxtApp, useRuntimeConfig } from '#app';
 import { nextTick, onBeforeUnmount, ref } from 'vue';
 import { onMounted } from '#imports';
 
 const runtimeConfig = useRuntimeConfig();
 const emits = defineEmits(["get-instance"]);
+const { $device } = useNuxtApp();
 
 const props = defineProps({
   episode: Object,
@@ -24,7 +25,6 @@ const instanceRef = ref(null);
 const options = {
   ssr: true,
   autoSize: true,
-  fullscreen: true,
   miniProgressBar: true,
   screenshot: true,
   mutex: true,
@@ -45,7 +45,10 @@ const options = {
   poster: props.episode.image || props.anime.bannerImage || props.anime.coverImage,
 }
 
-let currentSourceIndex = ref(0);
+if ($device.isDesktop) options.fullscreen = true;
+else options.fullscreenWeb = true;
+
+let currentSourceIndex = ref(1);
 let source = props.sources[currentSourceIndex.value];
 
 let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/source/${source.id}`, {
