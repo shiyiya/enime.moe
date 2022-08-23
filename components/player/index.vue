@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full p-0 m-0" ref="artRef"></div>
+  <div id="player" style="z-index: 9999999999999999999 !important;" class="w-full h-full p-0 m-0" ref="artRef"></div>
 </template>
 
 <script setup lang="ts">
@@ -48,7 +48,7 @@ const options = {
 if ($device.isDesktop) options.fullscreen = true;
 else options.fullscreenWeb = true;
 
-let currentSourceIndex = ref(1);
+let currentSourceIndex = ref(0);
 let source = props.sources[currentSourceIndex.value];
 
 let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/source/${source.id}`, {
@@ -56,6 +56,8 @@ let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/sourc
 });
 
 onMounted(() => {
+  artRef.value.style.zIndex = "9999999999999999999 !important;";
+
   Artplayer.TOUCH_MOVE_RATIO = 1.0;
 
   instanceRef.value = new Artplayer({
@@ -70,7 +72,8 @@ onMounted(() => {
         type: "vtt",
         encoding: "UTF-8",
         style: {
-          "font-size": "30px",
+          "font-size": "2vw",
+          "margin-bottom": "1.5rem"
         }
       }
     }),
@@ -98,7 +101,8 @@ onMounted(() => {
                 type: "vtt",
                 encoding: "UTF-8",
                 style: {
-                  "font-size": "30px",
+                  "font-size": "2vw",
+                  "margin-bottom": "1.5rem"
                 }
               })
               await art.switchUrl(sourceRef.value.url)
@@ -211,3 +215,10 @@ onBeforeUnmount(() => {
   }
 })
 </script>
+<script>
+
+</script>
+
+<style>
+
+</style>

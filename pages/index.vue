@@ -13,6 +13,9 @@ export default {
 }
 </script>
 
+<style>
+
+</style>
 <style scoped>
   .text-4xl {
     margin-left: 10vw;

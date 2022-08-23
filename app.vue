@@ -14,11 +14,21 @@
 </template>
 <script setup lang="ts">
 import { useRuntimeConfig } from '#app';
+import { onMounted } from 'vue';
 
 const production = useRuntimeConfig().public.production;
+
+onMounted(() => {
+  if (production) document.getElementById("arc-widget-container").style.setProperty("z-index", "999", "important")
+});
 </script>
 <script lang="ts">
 export default {
   name: "app"
 }
 </script>
+<style>
+#arc-widget-container {
+  z-index: 999 !important;
+}
+</style>
