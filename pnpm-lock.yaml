@@ -20,6 +20,7 @@ specifiers:
   arrive: ^2.4.1
   artplayer: ^4.5.4
   cross-env: ^7.0.3
+  escape-html-whitelist: ^0.1.4
   hls.js: 0.14.7
   lit: ^2.3.0
   nuxt: 3.0.0-rc.6
@@ -41,6 +42,7 @@ dependencies:
   '@pinia/nuxt': 0.3.1_vue@3.2.37
   arrive: 2.4.1
   artplayer: 4.5.4
+  escape-html-whitelist: 0.1.4
   hls.js: 0.14.7
   lit: 2.3.0
   pinia: 2.0.18_vue@3.2.37
@@ -2513,6 +2515,13 @@ packages:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
 
+  /escape-html-whitelist/0.1.4:
+    resolution: {integrity: sha512-yoIdSqbIZj81o52TFxdyW1YKwH32dEfQvc/9CbMXUFRA9xczSh6xKMuFXrJ48Nyh2OTgg+KWJCjCkhuq3K6CkQ==}
+    dependencies:
+      lodash.assign: 4.2.0
+      lodash.escape: 4.0.1
+    dev: false
+
   /escape-html/1.0.3:
     resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
     dev: true
@@ -3227,6 +3236,10 @@ packages:
   /lodash._reinterpolate/3.0.0:
     resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
 
+  /lodash.assign/4.2.0:
+    resolution: {integrity: sha512-hFuH8TY+Yji7Eja3mGiuAxBqLagejScbG8GbG0j6o9vzn0YL14My+ktnqtZgFTosKymC9/44wP6s7xyuLfnClw==}
+    dev: false
+
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
@@ -3238,6 +3251,10 @@ packages:
   /lodash.difference/4.5.0:
     resolution: {integrity: sha512-dS2j+W26TQ7taQBGN8Lbbq04ssV3emRw4NY58WErlTO29pIqS0HmoT5aJ9+TUQ1N3G+JOZSji4eugsWwGp9yPA==}
     dev: true
+
+  /lodash.escape/4.0.1:
+    resolution: {integrity: sha512-nXEOnb/jK9g0DYMr1/Xvq6l5xMD7GDG55+GSYIYmS0G4tBk/hURD4JR9WCavs04t33WmJx9kCyp9vJ+mr4BOUw==}
+    dev: false
 
   /lodash.flatten/4.4.0:
     resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}

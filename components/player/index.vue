@@ -8,6 +8,8 @@ import Hls from 'hls.js';
 import { useFetch, useNuxtApp, useRuntimeConfig } from '#app';
 import { nextTick, onBeforeUnmount, ref } from 'vue';
 import { onMounted } from '#imports';
+// @ts-ignore
+import escapeHtml from 'escape-html-whitelist';
 
 const runtimeConfig = useRuntimeConfig();
 const emits = defineEmits(["get-instance"]);
@@ -127,6 +129,10 @@ onMounted(() => {
   nextTick(() => {
     emits("get-instance", instance);
   });
+
+  instance.on('subtitleUpdate', text => {
+    instance.template.$subtitle.innerHTML = `<p>${escapeHtml(text)}</p>`;
+  })
 
   instance.on("destroy", () => {
     if (instance.hls) {
