@@ -19,7 +19,14 @@ import { onMounted } from 'vue';
 const production = useRuntimeConfig().public.production;
 
 onMounted(() => {
-  if (production) document.getElementById("arc-widget-container").style.setProperty("z-index", "999", "important")
+  if (production) {
+    import('arrive').then(() => {
+      document.arrive("#arc-widget-container", () => {
+        document.getElementById("arc-widget-container").style.setProperty("z-index", "999", "important");
+      })
+    });
+    document.getElementById("arc-widget-container")?.style?.setProperty("z-index", "999", "important");
+  }
 });
 </script>
 <script lang="ts">
