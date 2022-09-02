@@ -90,7 +90,9 @@ onMounted(() => {
           art.hls = new Hls({
             debug: false
           });
-          art.hls.on("hlsError", async () => {
+          art.hls.on("hlsError", async ({ type, details, fatal }) => {
+            if (!fatal) return;
+
             if (currentSourceIndex.value < props.sources.length) {
               currentSourceIndex.value++;
               source = props.sources[currentSourceIndex.value];
