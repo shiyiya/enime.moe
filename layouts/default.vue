@@ -1,7 +1,7 @@
 <template>
   <div class="bg-black text-white h-screen w-screen flex flex-col">
     <div class="nav-cont">
-      <div class="opts flex items-center gap-8 h-full mx-auto relative" ref="opts">
+      <div class="opts flex items-center gap-8 h-full mx-auto relative" ref="optsRef">
         <nuxt-link to="/" class="navbar-opt text-4xl">Explore</nuxt-link>
         <div class="grid w-40" v-if="old">
           <div class="urmom text-4xl flex flex-row flex-nowrap items-center px-2">
@@ -19,8 +19,8 @@
           <span class="searchtext pl-1">Search</span>
         </div>
       </div>
-      <div ref="searchbar" class="m-auto hidden bruh">
-        <input @keyup.enter="search" @keyup="searchtype" ref="fullsearch" placeholder="Search"
+      <div ref="searchbarRef" class="m-auto hidden bruh">
+        <input @keyup.enter="search" @keyup="searchtype" ref="fullsearchRef" placeholder="Search"
           class="p-2 px-4 text-4xl w-full" />
         <div class="divider" ref="searchdivider" v-if="results.length"></div>
         <!-- <div class="text-tertiary ml-4 text-lg" v-if="histresults.length">HISTORY</div>
@@ -81,91 +81,93 @@
 </template>
 
 <script setup lang="ts">
-  const old = false;
-  // onMounted(() => {
-  //   document.addEventListener("keydown", function (event) {
-  //     if(event.ctrlKey && event.key === 'k') {
-  //       if(fn) fn({});
-  //       searchbar();
-  //     }
-  //     event.preventDefault();
-  //   })
-  //   pastsearches.value = (JSON.parse(localStorage.getItem("history")) || []).concat([ "one", "once", "hone" ]);
-  //   console.log(pastsearches.value);
-  // })
-</script>
+import { nextTick, onMounted, ref, useRuntimeConfig } from '#imports';
+  import { gettitle } from 'assets/ts/helpers';
+  import { navigateTo } from '#app';
 
-<script lang="ts">
-import { nextTick, ref, onMounted } from "#imports";
-import { navigateTo } from "#app";
-import { gettitle } from "../assets/ts/helpers";
-let results = ref([]);
-// let histresults = ref([]);
-// let pastsearches = ref([]);
-let fn, fn2;
-let timeout;
-export default {
-  name: "default",
-  methods: {
-    search(e) {
-      let search = e.target.value.trim();
-      clearTimeout(timeout);
-      results.value = [];
-      e.target.value = "";
-      fn({});
-      if(search.length > 1)
-        navigateTo(`/search/${search}`);
-    },
-    searchtype(e) {
-      document.removeEventListener("click", fn);
-      document.removeEventListener("click", fn2);
-      document.addEventListener("click", fn2 = function(event) {
-        if (event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")){
-          return;
-        }
-        results.value = [];
-        // histresults.value = [];
-      });
-      if(!e.target.value) document.addEventListener("click", fn);
-      // if(e.target.value)
-      //   histresults.value = pastsearches.value.filter(s => s.includes(e.target.value)).map(s => {
-      //     return {
-      //       title: {
-      //         userPreferred: s, english: s
-      //       }
-      //     }
-      //   });
-      //else histresults.value = pastsearches.value;
-      if(timeout) { clearTimeout(timeout); timeout = 0; }
-      if(e.target.value.length < 2) {
-        results.value = [];
+  const runtimeConfig = useRuntimeConfig();
+  const old = false;
+  const searchbarRef = ref(null);
+  const fullsearchRef = ref(null);
+  const optsRef = ref(null);
+  const results = ref([]);
+  const pastSearchesRef = ref([]);
+
+  let fn, fn2, timeout;
+
+  const baseApiUrl = runtimeConfig.public.enimeApi;
+
+  const search = (e) => {
+    let search = e.target.value.trim();
+    clearTimeout(timeout);
+    results.value = [];
+    e.target.value = "";
+    fn({});
+    if(search.length > 1)
+      navigateTo(`/search/${search}`);
+  }
+
+  const searchtype = (e) => {
+    document.removeEventListener("click", fn);
+    document.removeEventListener("click", fn2);
+    document.addEventListener("click", fn2 = function(event) {
+      if (event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement?.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")){
         return;
       }
-      timeout = setTimeout(async () => {
-        results.value = (await (await fetch(`https://api.enime.moe/search/` + e.target.value)).json()).data.slice(0, 10);
-        // console.log(results.value);
-      }, 1000);
-    },
-    async searchbar(e) {
-      const sb = this.$refs.searchbar;
-      const fs = this.$refs.fullsearch;
-      const opts = this.$refs.opts;
-      
-      opts.classList.add("hidden");
-      sb.classList.remove("hidden");
-      await nextTick();
-      fs.focus();
-      document.addEventListener("click", fn = function (event) {
-        // console.log("???", event.target, this);
-        if (event.target && event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")) return;
-        document.removeEventListener("click", fn);
-        fs.value = "";
-        sb.classList.add("hidden");
-        opts.classList.remove("hidden");
-      });
+      results.value = [];
+      // histresults.value = [];
+    });
+    if(!e.target.value) document.addEventListener("click", fn);
+    // if(e.target.value)
+    //   histresults.value = pastsearches.value.filter(s => s.includes(e.target.value)).map(s => {
+    //     return {
+    //       title: {
+    //         userPreferred: s, english: s
+    //       }
+    //     }
+    //   });
+    //else histresults.value = pastsearches.value;
+    if(timeout) { clearTimeout(timeout); timeout = 0; }
+    if(e.target.value.length < 2) {
+      results.value = [];
+      return;
     }
+    timeout = setTimeout(async () => {
+      results.value = (await (await fetch(`${baseApiUrl}/search/` + e.target.value)).json()).data.slice(0, 10);
+      // console.log(results.value);
+    }, 1000);
   }
-}
+
+  const searchbar = async (e) => {
+    const sb = searchbarRef.value;
+    const fs = fullsearchRef.value;
+    const opts = optsRef.value;
+
+    opts.classList.add("hidden");
+    sb.classList.remove("hidden");
+    await nextTick();
+    fs.focus();
+    document.addEventListener("click", fn = function (event) {
+      // console.log("???", event.target, this);
+      if (event.target && (event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement?.classList?.contains("bruh") || event.target.parentElement?.parentElement?.classList?.contains("bruh"))) return;
+      document.removeEventListener("click", fn);
+      fs.value = "";
+      sb.classList.add("hidden");
+      opts.classList.remove("hidden");
+    });
+  }
+
+  onMounted(() => {
+     document.addEventListener("keydown", function (event) {
+       if(event.ctrlKey && event.key === 'k') {
+         event.preventDefault();
+
+         if(fn) fn({});
+         searchbar(event);
+       }
+     });
+     pastSearchesRef.value = (JSON.parse(localStorage.getItem("history")) || []).concat([ "one", "once", "hone" ]);
+   })
 </script>
 
 <style scoped lang="scss">

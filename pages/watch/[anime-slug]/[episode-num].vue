@@ -31,6 +31,7 @@
 import { definePageMeta, nextTick, onMounted, ref, watch, watchEffect } from '#imports';
 import { navigateTo, useFetch, useHead, useRoute, useRuntimeConfig } from '#app';
 import { createError } from 'h3';
+import { gettitle } from 'assets/ts/helpers';
 const runtimeConfig = useRuntimeConfig();
 
 const route = useRoute();
@@ -55,7 +56,7 @@ if (error.value || !episode.value) {
 const { id, description, number, anime, title, sources, image, createdAt } = episode.value;
 
 const animeeps = anime.episodes.sort((a, b) => a.number - b.number);
-const preferredTitle = anime.title.userPreferred || anime.title.english || anime.title.romaji;
+const preferredTitle = gettitle(anime.title);
 
 useHead({
   title: `Episode ${number}${title ? ` - ${title}` : ""} | ${preferredTitle} | Enime`,
