@@ -1,5 +1,5 @@
 <template>
-  <div id="player" style="z-index: 9999999999999999999 !important;" class="w-full h-full p-0 m-0" ref="artRef"></div>
+  <div id="player" class="w-full h-full p-0 m-0" ref="artRef"></div>
 </template>
 
 <script setup lang="ts">
