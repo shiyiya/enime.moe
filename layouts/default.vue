@@ -12,7 +12,7 @@
           </div>
           <input @keyup.enter="search" ref="search" placeholder=" " class="urmom in p-2 text-4xl w-70" />
         </div>
-        <div class="urmom navbar-opt text-4xl flex flex-row flex-nowrap items-center px-2" v-else @click="searchbar">
+        <div class="urmom navbar-opt text-4xl flex flex-row flex-nowrap items-center px-2" tabindex="0" v-else @click="searchbar">
           <svg width="1.5rem" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
@@ -22,7 +22,7 @@
       <div ref="searchbar" class="m-auto hidden bruh">
         <input @keyup.enter="search" @keyup="searchtype" ref="fullsearch" placeholder="Search"
           class="p-2 px-4 text-4xl w-full" />
-        <div class="divider" ref="searchdivider" v-if="results.length || histresults.length"></div>
+        <div class="divider" ref="searchdivider" v-if="results.length"></div>
         <!-- <div class="text-tertiary ml-4 text-lg" v-if="histresults.length">HISTORY</div>
         <nuxt-link :to="`/search/${result.title.userPreferred}`" class="searchresultlink history"
           v-for="result in histresults" :key="result.id">
@@ -34,7 +34,7 @@
           <p class="searchresulttitle text-xl">{{ result.title.userPreferred }}</p>
         </nuxt-link>
         <div class="text-tertiary ml-4 text-lg" v-if="results.length">ANIME</div> -->
-        <nuxt-link :to="`/anime/${result.slug}`" class="searchresultlink anime" v-for="result in results"
+        <nuxt-link :to="`/anime/${result.slug}`" tabindex="0" class="searchresultlink anime" v-for="result in results"
           :key="result.id">
           <div class="searchresultimg h-10 aspect-video bg-cover bg-center"
             :style="{ backgroundImage: `url(${result.coverImage})` }"></div>
@@ -83,6 +83,13 @@
 <script setup lang="ts">
   const old = false;
   // onMounted(() => {
+  //   document.addEventListener("keydown", function (event) {
+  //     if(event.ctrlKey && event.key === 'k') {
+  //       if(fn) fn({});
+  //       searchbar();
+  //     }
+  //     event.preventDefault();
+  //   })
   //   pastsearches.value = (JSON.parse(localStorage.getItem("history")) || []).concat([ "one", "once", "hone" ]);
   //   console.log(pastsearches.value);
   // })
@@ -105,7 +112,7 @@ export default {
       clearTimeout(timeout);
       results.value = [];
       e.target.value = "";
-      fn({ target: document.body });
+      fn({});
       if(search.length > 1)
         navigateTo(`/search/${search}`);
     },
@@ -113,7 +120,7 @@ export default {
       document.removeEventListener("click", fn);
       document.removeEventListener("click", fn2);
       document.addEventListener("click", fn2 = function(event) {
-        if (event.target?.classList?.contains?.("searchtext") || event.target?.classList?.contains?.("bruh") || event.target?.parentElement?.classList?.contains?.("bruh") || event.target?.parentElement?.parentElement?.classList?.contains?.("bruh")){
+        if (event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")){
           return;
         }
         results.value = [];
@@ -136,7 +143,7 @@ export default {
       }
       timeout = setTimeout(async () => {
         results.value = (await (await fetch(`https://api.enime.moe/search/` + e.target.value)).json()).data.slice(0, 10);
-        console.log(results.value);
+        // console.log(results.value);
       }, 1000);
     },
     async searchbar(e) {
@@ -150,7 +157,7 @@ export default {
       fs.focus();
       document.addEventListener("click", fn = function (event) {
         // console.log("???", event.target, this);
-        if (event.target?.classList?.contains?.("searchtext") || event.target?.classList?.contains?.("bruh") || event.target?.parentElement?.classList?.contains?.("bruh") || event.target?.parentElement?.parentElement?.classList?.contains?.("bruh")) return;
+        if (event.target && event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")) return;
         document.removeEventListener("click", fn);
         fs.value = "";
         sb.classList.add("hidden");
