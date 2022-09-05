@@ -19,3 +19,23 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+
+  &-button {
+    background-color: #111;
+    height: 1%;
+  }
+  &-thumb {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+    background-color: #333;
+    border-radius: 10px;
+  }
+  &-track {
+    background-color: #111;
+  }
+}
