@@ -7,7 +7,7 @@
       <div class="cover absolute w-50 h-75 bg-center bg-cover rounded-md"
            :style="{ backgroundImage: `url(${coverImage})`}"></div>
       <div class="desc mb-20">
-        <p class="text-white text-4xl">{{ title.userPreferred || title.english || title.romaji }}</p>
+        <p class="text-white text-4xl">{{ gettitle(title) }}</p>
         <p class="text-tertiary text-2xl">{{ status }} • {{ currentEpisode }} Episodes</p>
         <button @click="firstep" class="firstep text-sm mt-2 flex flex-row flex-nowrap items-center px-2">
           <p>First Episode</p>
@@ -26,6 +26,7 @@
 <script setup lang="ts">
   import { useFetch, navigateTo, useRoute, useRuntimeConfig, useHead } from '#app';
   import { createError } from 'h3';
+  import { gettitle } from "../../assets/ts/helpers";
 
   const runtimeConfig = useRuntimeConfig();
   const route = useRoute();

@@ -3,10 +3,13 @@
     <div class="anime-image bg-cover bg-center rounded-md mb-3"
       :style="{ backgroundImage: `url(${anime.coverImage})` }" />
     <p class="text-sm text-tertiary text-overflow">EP{{ number }}<span v-if="title">: {{ title }}</span></p>
-    <p class="text-overflow p-0 text-white anime-title">{{ anime.title.userPreferred || anime.title.english ||
-      anime.title.romaji }}</p>
+    <p class="text-overflow p-0 text-white anime-title">{{ gettitle(anime.title) }}</p>
   </div>
 </template>
+
+<script setup lang="ts">
+import { gettitle } from "../../assets/ts/helpers";
+</script>
 
 <script lang="ts">
 export default {
