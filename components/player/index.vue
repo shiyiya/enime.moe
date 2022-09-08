@@ -7,16 +7,11 @@ import Player from '@oplayer/core';
 import PlayerUI from '@oplayer/ui';
 import hls from '@oplayer/hls';
 
-import Artplayer from 'artplayer';
-import Hls from 'hls.js';
 import { useFetch, useNuxtApp, useRuntimeConfig } from '#app';
 import { nextTick, onBeforeUnmount, ref } from 'vue';
 import { onMounted } from '#imports';
-// @ts-ignore
-import escapeHtml from 'escape-html-whitelist';
 
 const runtimeConfig = useRuntimeConfig();
-const emits = defineEmits(["get-instance"]);
 
 const props = defineProps({
   episode: Object,
@@ -34,26 +29,59 @@ let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/sourc
   key: `source-${source.id}`
 });
 
+const posterRaw = props.episode.image || props.anime.bannerImage || props.anime.coverImage;
+const poster = `https://images.weserv.nl/?url=${posterRaw}`;
+
 onMounted(() => {
   const player = Player.make(playerContainerRef.value, {
     source: {
       src: sourceRef.value.url,
-      poster: props.episode.image || props.anime.bannerImage || props.anime.coverImage
-    }
+      poster: poster
+    },
+    preload: "metadata",
   })
       .use([PlayerUI({
-        ...(sourceRef.value.subtitle && {
-          subtitle: {
-            source: [
-              {
-                default: true,
-                src: sourceRef.value.subtitle
-              }
-            ]
-          }
-        })
+        subtitle: {
+          source: sourceRef.value.subtitle ? [
+            {
+              default: true,
+              src: sourceRef.value.subtitle
+            }
+          ] : [],
+          fontSize: 30,
+          enabled: true
+        }
       }), hls()])
       .create();
+
+  player.on("subtitlechange", ({ payload }) => {
+    console.log(payload)
+  })
+  player.on("error", async (event) => {
+    if (event.payload.target?.error) {
+      if (currentSourceIndex.value < props.sources.length) {
+        currentSourceIndex.value++;
+        source = props.sources[currentSourceIndex.value];
+
+        let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/source/${source.id}`, {
+          key: `source-${source.id}`
+        });
+
+        await player.changeSource({
+          src: sourceRef.value.url,
+          poster: poster
+        });
+
+        if (sourceRef.value.subtitle) player.emit("subtitlechange", [
+          {
+            default: true,
+            src: sourceRef.value.subtitle,
+            name: "English"
+          }
+        ]);
+      }
+    }
+  });
 
   instanceRef.value = player;
 });
