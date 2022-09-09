@@ -52,7 +52,12 @@ onMounted(() => {
           fontSize: 30,
           enabled: true
         }
-      }), hls()])
+      }), hls({
+        options: {
+          hlsQualityControl: true,
+          hlsQualitySwitch: "smooth"
+        }
+      })])
       .create();
 
   player.on("error", async (event) => {
