@@ -4,12 +4,12 @@
 
 <script setup lang="ts">
 import Player from '@oplayer/core';
-import PlayerUI from '@oplayer/ui';
+import ui from '@oplayer/ui';
 import hls from '@oplayer/hls';
 
 import { useFetch, useNuxtApp, useRuntimeConfig } from '#app';
 import { nextTick, onBeforeUnmount, ref } from 'vue';
-import { onMounted } from '#imports';
+import { onMounted, watch } from '#imports';
 
 const runtimeConfig = useRuntimeConfig();
 
@@ -37,10 +37,14 @@ onMounted(() => {
     source: {
       src: sourceRef.value.url,
       poster: poster
-    },
-    preload: "metadata",
+    }
   })
-      .use([PlayerUI({
+      .use([hls({
+        options: {
+          hlsQualityControl: true,
+          hlsQualitySwitch: "smooth"
+        }
+      }), ui({
         fullscreenWeb: false,
         subtitle: {
           source: sourceRef.value.subtitle ? [
@@ -51,11 +55,6 @@ onMounted(() => {
           ] : [],
           fontSize: 30,
           enabled: true
-        }
-      }), hls({
-        options: {
-          hlsQualityControl: true,
-          hlsQualitySwitch: "smooth"
         }
       })])
       .create();
