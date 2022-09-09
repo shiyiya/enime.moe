@@ -41,6 +41,7 @@ onMounted(() => {
     preload: "metadata",
   })
       .use([PlayerUI({
+        fullscreenWeb: false,
         subtitle: {
           source: sourceRef.value.subtitle ? [
             {
@@ -54,9 +55,6 @@ onMounted(() => {
       }), hls()])
       .create();
 
-  player.on("subtitlechange", ({ payload }) => {
-    console.log(payload)
-  })
   player.on("error", async (event) => {
     if (event.payload.target?.error) {
       if (currentSourceIndex.value < props.sources.length) {
