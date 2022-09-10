@@ -29,7 +29,7 @@ let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/sourc
   key: `source-${source.id}`
 });
 
-const posterRaw = props.episode.image || props.anime.bannerImage || props.anime.coverImage;
+const posterRaw = props.episode.image;
 const poster = !posterRaw ? undefined : `https://images.weserv.nl/?url=${posterRaw}`;
 
 onMounted(() => {
