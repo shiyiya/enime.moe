@@ -30,13 +30,15 @@ let { data: sourceRef } = await useFetch(`${runtimeConfig.public.enimeApi}/sourc
 });
 
 const posterRaw = props.episode.image || props.anime.bannerImage || props.anime.coverImage;
-const poster = `https://images.weserv.nl/?url=${posterRaw}`;
+const poster = !posterRaw ? undefined : `https://images.weserv.nl/?url=${posterRaw}`;
 
 onMounted(() => {
   const player = Player.make(playerContainerRef.value, {
     source: {
       src: sourceRef.value.url,
-      poster: poster
+      ...(!!poster && {
+        poster: poster
+      })
     }
   })
       .use([hls({
@@ -73,7 +75,9 @@ onMounted(() => {
 
         await player.changeSource({
           src: sourceRef.value.url,
-          poster: poster
+          ...(!!poster && {
+            poster: poster
+          })
         });
 
         if (sourceRef.value.subtitle) player.emit("subtitlechange", [
