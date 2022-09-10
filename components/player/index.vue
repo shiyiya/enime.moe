@@ -42,7 +42,7 @@ onMounted(() => {
       .use([hls({
         options: {
           hlsQualityControl: true,
-          hlsQualitySwitch: "smooth"
+          hlsQualitySwitch: "immediate"
         }
       }), ui({
         fullscreenWeb: false,
@@ -59,8 +59,10 @@ onMounted(() => {
       })])
       .create();
 
-  player.on("error", async (event) => {
-    if (event.payload.target?.error) {
+  player.on(["pluginerror", "error"], async (event) => {
+    const fatal = event?.payload?.fatal;
+
+    if (fatal) {
       if (currentSourceIndex.value < props.sources.length) {
         currentSourceIndex.value++;
         source = props.sources[currentSourceIndex.value];
