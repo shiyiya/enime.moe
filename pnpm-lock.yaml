@@ -12,9 +12,9 @@ specifiers:
   '@nuxtjs/device': github:Redemption198/device-module#master
   '@nuxtjs/partytown': ^1.2.1
   '@nuxtjs/supabase': ^0.1.19
-  '@oplayer/core': ^1.0.34
-  '@oplayer/hls': ^1.0.34
-  '@oplayer/ui': ^1.0.34
+  '@oplayer/core': ^1.0.35
+  '@oplayer/hls': ^1.0.35
+  '@oplayer/ui': ^1.0.35
   '@pinia/nuxt': ^0.3.0
   '@types/hls.js': ^1.0.0
   '@vueuse/core': ^8.9.4
@@ -38,9 +38,9 @@ dependencies:
   '@nuxt-modules/compression': 0.1.0
   '@nuxtjs/device': github.com/Redemption198/device-module/fef752e07835462cf4a855c414608e7612525d34
   '@nuxtjs/supabase': 0.1.19
-  '@oplayer/core': 1.0.34
-  '@oplayer/hls': 1.0.34_fszcoygck4ihx3z2pm26qlgzia
-  '@oplayer/ui': 1.0.34_@oplayer+core@1.0.34
+  '@oplayer/core': 1.0.35
+  '@oplayer/hls': 1.0.35_pleyayowjtz3fk6itpv2cucrwm
+  '@oplayer/ui': 1.0.35_@oplayer+core@1.0.35
   '@pinia/nuxt': 0.3.1_vue@3.2.37
   hls.js: 1.2.1
   lit: 2.3.0
@@ -694,26 +694,26 @@ packages:
       - webpack
     dev: false
 
-  /@oplayer/core/1.0.34:
-    resolution: {integrity: sha512-Dn4U94yBdFA7uLeCctX2OQKw9r7GDOzj2dnRuLfqeLERrgs3XiSBskOVAXe5KnVm1h0p9p6BJkKU3QsDILtewA==}
+  /@oplayer/core/1.0.35:
+    resolution: {integrity: sha512-tH/H78xMEFwZ5c6X7OTz+6yN+U+Il+FG3Y2jFmqiO1TbCnDkp++QCqEXnX3ErgCfi9QRKcVBTKsUR7dbMFn6iQ==}
     dev: false
 
-  /@oplayer/hls/1.0.34_fszcoygck4ihx3z2pm26qlgzia:
-    resolution: {integrity: sha512-jcLYwXZwMP9yXEzed8prm8OXSvnqPzoghRf7OeBhPg9vGAtN3MFHIxQzeUgoLZHYOC4MAVCQMkeJVWhKmAsw1w==}
+  /@oplayer/hls/1.0.35_pleyayowjtz3fk6itpv2cucrwm:
+    resolution: {integrity: sha512-7RvdYoHTBt8jMgXdwGozjh9up5BS+oYFyqgtSq9jeDmxDnXUGNb1GLutE5n4FFLFg28MPi5Jl1Jc2+3vcRrLyQ==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
       hls.js: '>=1.0.0'
     dependencies:
-      '@oplayer/core': 1.0.34
+      '@oplayer/core': 1.0.35
       hls.js: 1.2.1
     dev: false
 
-  /@oplayer/ui/1.0.34_@oplayer+core@1.0.34:
-    resolution: {integrity: sha512-nvkFg4oanedIAHvUwQcxWHJ/P02mH3aD/v28sbQr9CWU3/bHOqEKORgEWTTndlCOi6XexpO13anvTVs8vqQ+SA==}
+  /@oplayer/ui/1.0.35_@oplayer+core@1.0.35:
+    resolution: {integrity: sha512-fBiuDS3dfsi/Hm6d1rT/eF9uEzB9vHrlPLGC3A8E3klaJCu9gLzZo2YFUimIMtXh3ZHpb2Pg9ZoUbEm7ssRjow==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
     dependencies:
-      '@oplayer/core': 1.0.34
+      '@oplayer/core': 1.0.35
     dev: false
 
   /@pinia/nuxt/0.3.1_vue@3.2.37:
