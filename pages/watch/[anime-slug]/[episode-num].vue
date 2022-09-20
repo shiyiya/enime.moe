@@ -79,7 +79,7 @@ useHead({
     },
     {
       name: "og:description",
-      content: `Watch ${preferredTitle} Episode ${number}${title ? ` - ${title}` : ""} online on Enime ${description ? ` - ${description}` : ""}`
+      content: `Watch ${preferredTitle} Episode ${number}${title ? ` - ${title}` : ""} online on Enime ${description ? `\n${description}` : ""}`
     },
     {
       name: "twitter:card",

@@ -19,7 +19,7 @@ const props = defineProps({
   anime: Object
 });
 
-const instanceRef = ref(null);
+let instanceRef = undefined;
 const playerContainerRef = ref(null);
 
 let currentSourceIndex = ref(0);
@@ -91,7 +91,11 @@ onMounted(() => {
     }
   });
 
-  instanceRef.value = player;
+  instanceRef = player;
+});
+
+onBeforeUnmount(() => {
+  if (instanceRef) instanceRef.destroy();
 });
 </script>
 <script>
