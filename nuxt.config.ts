@@ -1,13 +1,16 @@
-import { defineNuxtConfig } from 'nuxt';
+import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
+    build: {
+        transpile: ["vue-router",  "ufo", "hls.js"]
+    },
+
     modules: [
         "nuxt-windicss",
         "@vueuse/nuxt",
         "@pinia/nuxt",
         "nuxt-storm",
         "@nuxtjs/supabase",
-        "@nuxtjs/device"
         // "@nuxtjs/partytown"
     ],
 
