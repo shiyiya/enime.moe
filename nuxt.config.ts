@@ -62,6 +62,12 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
     ],
 
+    nitro: {
+        routes: {
+            "/": { swr: 10 * 60 }
+        }
+    },
+
     /*
     partytown: {
         forward: ["dataLayer.push"],
