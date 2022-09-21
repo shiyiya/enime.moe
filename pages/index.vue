@@ -1,9 +1,7 @@
 <template>
   <div>
     <p class="font-bold text-4xl mt-10">Recently Released</p>
-    <client-only>
-      <recent-release/>
-    </client-only>
+    <recent-release/>
   </div>
 </template>
 
