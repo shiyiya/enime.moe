@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { gettitle } from "../../assets/ts/helpers";
+import { gettitle } from 'assets/ts/helpers';
 </script>
 
 <script lang="ts">

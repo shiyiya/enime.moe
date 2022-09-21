@@ -23,7 +23,9 @@ import { createError } from 'h3';
   const url = `${route.params.search}`;
   const results = ref([]);
 
-  const { error, data } = await useFetch(`${runtimeConfig.public.enimeApi}/search/${url}?perPage=10`, {
+  const { error, data } = await useFetch<{
+    data: object[]
+  }>(`${runtimeConfig.public.enimeApi}/search/${url}?perPage=10`, {
     key: url
   });
 

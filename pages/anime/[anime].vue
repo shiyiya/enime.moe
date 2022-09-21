@@ -32,7 +32,21 @@
   const route = useRoute();
   const url = `${route.params.anime}`;
 
-  const { error, data: animeData } = await useFetch(`${runtimeConfig.public.enimeApi}/anime/${url}`, { key: "/anime/" + url });
+  const { error, data: animeData } = await useFetch<{
+    title: {
+      english: string | undefined,
+      romaji: string | undefined,
+      native: string | undefined,
+      userPreferred: string | undefined
+    },
+    slug: string,
+    bannerImage: string | undefined,
+    coverImage: string | undefined,
+    description: string | undefined,
+    status: "RELEASING" | "FINISHED" | "CANCELLED" | "HIATUS",
+    currentEpisode: number,
+    color: string | undefined
+  }>(`${runtimeConfig.public.enimeApi}/anime/${url}`, { key: "/anime/" + url });
 
   if (error.value || !animeData.value)
     throw createError({ statusCode: 404, message: "Anime not found" });

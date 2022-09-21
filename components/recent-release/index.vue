@@ -14,7 +14,6 @@
 <script setup lang="ts">
   import { ref, watch } from '#imports';
   import { useFetch, useRuntimeConfig } from '#app';
-  import { onMounted } from 'vue';
 
   const runtimeConfig = useRuntimeConfig();
 

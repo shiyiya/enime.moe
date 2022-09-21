@@ -45,7 +45,30 @@ definePageMeta({
   }
 });
 
-const { error, data: episode } = await useFetch(`${runtimeConfig.public.enimeApi}/view/${url}`, {
+const { error, data: episode } = await useFetch<{
+  id: string,
+  description: string | undefined,
+  number: number,
+  anime: {
+    title: {
+      english: string | undefined,
+      romaji: string | undefined,
+      native: string | undefined,
+      userPreferred: string | undefined
+    },
+    slug: string,
+    episodes: {
+      number: number
+    }[],
+    bannerImage: string | undefined,
+    coverImage: string | undefined,
+    color: string | undefined
+  },
+  title: string | undefined,
+  sources: object[],
+  image: string | undefined,
+  createdAt: Date | undefined
+}>(`${runtimeConfig.public.enimeApi}/view/${url}`, {
   key: url
 });
 
@@ -99,18 +122,6 @@ onMounted(() => {
     if (current) current.$el.scrollIntoView({ behavior: "auto", block: "nearest" })
   }
 })
-</script>
-
-<script lang="ts">
-import Player from '~/components/player/index.vue';
-
-export default {
-  components: {
-    Player,
-  },
-  methods: {
-  },
-};
 </script>
 
 <style scoped>
