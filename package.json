@@ -27,9 +27,9 @@
   "dependencies": {
     "@nuxt-modules/compression": "^0.1.0",
     "@nuxtjs/supabase": "^0.1.25",
-    "@oplayer/core": "^1.0.39",
-    "@oplayer/hls": "^1.0.39",
-    "@oplayer/ui": "^1.0.39",
+    "@oplayer/core": "^1.0.40",
+    "@oplayer/hls": "^1.0.40",
+    "@oplayer/ui": "^1.0.40",
     "@pinia/nuxt": "^0.4.2",
     "hls.js": "1.2.3",
     "lit": "^2.3.0",

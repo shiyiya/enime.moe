@@ -16,7 +16,8 @@ const runtimeConfig = useRuntimeConfig();
 const props = defineProps({
   episode: Object,
   sources: Array as PropType<{
-    id: String
+    id: String,
+    url: String
   }[]>,
   anime: Object
 });
@@ -61,9 +62,51 @@ onMounted(() => {
           ] : [],
           fontSize: 30,
           enabled: true
-        }
+        },
+        menu: [
+          {
+            name: "Source",
+            children: props.sources.map(source => {
+              return {
+                name: source.url.includes("gogoanime") ? "Gogoanime" : "Zoro",
+                default: source.url.includes("gogoanime"),
+                value: source.id
+              }
+            }),
+            onChange({ value }) {
+              changeSource(value);
+            },
+            onClick() {
+
+            }
+          }
+        ]
       })])
       .create();
+
+  const changeSource = async (sourceId) => {
+    let { data: sourceRef } = await useFetch<{
+      url: string,
+      subtitle?: string
+    }>(`${runtimeConfig.public.enimeApi}/source/${sourceId}`, {
+      key: `source-${sourceId}`
+    });
+
+    await player.changeSource({
+      src: sourceRef.value.url,
+      ...(!!poster && {
+        poster: poster
+      })
+    });
+
+    if (sourceRef.value.subtitle) player.emit("subtitlechange", [
+      {
+        default: true,
+        src: sourceRef.value.subtitle,
+        name: "English"
+      }
+    ]);
+  }
 
   player.on(["pluginerror", "error"], async (event) => {
     const fatal = event?.payload?.fatal;
@@ -73,27 +116,7 @@ onMounted(() => {
         currentSourceIndex.value++;
         source = props.sources[currentSourceIndex.value];
 
-        let { data: sourceRef } = await useFetch<{
-          url: string,
-          subtitle?: string
-        }>(`${runtimeConfig.public.enimeApi}/source/${source.id}`, {
-          key: `source-${source.id}`
-        });
-
-        await player.changeSource({
-          src: sourceRef.value.url,
-          ...(!!poster && {
-            poster: poster
-          })
-        });
-
-        if (sourceRef.value.subtitle) player.emit("subtitlechange", [
-          {
-            default: true,
-            src: sourceRef.value.subtitle,
-            name: "English"
-          }
-        ]);
+        await changeSource(source.id);
       }
     }
   });
