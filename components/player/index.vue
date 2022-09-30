@@ -47,12 +47,7 @@ onMounted(() => {
       })
     }
   })
-      .use([hls({
-        options: {
-          hlsQualityControl: true,
-          hlsQualitySwitch: "immediate"
-        }
-      }), ui({
+      .use([ui({
         subtitle: {
           source: sourceRef.value.subtitle ? [
             {
@@ -81,6 +76,11 @@ onMounted(() => {
             }
           }
         ]
+      }), hls({
+        options: {
+          hlsQualityControl: true,
+          hlsQualitySwitch: "immediate"
+        }
       })])
       .create();
 
@@ -99,6 +99,7 @@ onMounted(() => {
       })
     });
 
+    console.log(sourceRef.value)
     if (sourceRef.value.subtitle) player.emit("subtitlechange", [
       {
         default: true,

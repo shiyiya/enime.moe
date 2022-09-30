@@ -1,5 +1,5 @@
 <template>
-  <div @click="login('discord')">Login</div>
+  <div class="cursor-pointer" @click="login('discord')">Sign in with Discord</div>
 </template>
 
 <script setup lang="ts">

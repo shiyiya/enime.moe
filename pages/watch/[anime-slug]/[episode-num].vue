@@ -42,7 +42,8 @@ const url = `${route.params.animeslug}/${route.params.episodenum}`;
 definePageMeta({
   key: route => {
     return `/${route.params.animeslug}/${route.params.episodenum}`;
-  }
+  },
+  middleware: "auth"
 });
 
 const { error, data: episode } = await useFetch<{

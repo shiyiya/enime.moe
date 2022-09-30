@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
     build: {
-        transpile: ["vue-router",  "ufo", "hls.js"]
+        transpile: ["vue-router",  "ufo"]
     },
 
     modules: [
