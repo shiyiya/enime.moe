@@ -65,7 +65,7 @@ definePageMeta({
   key: route => {
     return `/${route.params.animeslug}/${route.params.episodenum}`;
   },
-  middleware: "auth"
+  // middleware: "auth"
 });
 
 const { error, data: episode } = await useFetch<{

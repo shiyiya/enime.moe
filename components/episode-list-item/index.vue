@@ -5,12 +5,12 @@
     <p class="eptext text-overflow">Episode {{ number }}<span v-if="title">: {{
         title
     }}</span></p>
-    <p class="text-tertiary text-[0.875rem] mb-1 m-0">Released {{ago}}</p>
+    <p class="text-tertiary text-[0.875rem] mb-1 m-0">Released {{ ago }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "#app";
+import { toRefs } from '#imports';
 
 const e = defineProps<{
   airedAt: null | string;
