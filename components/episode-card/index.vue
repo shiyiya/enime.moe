@@ -15,7 +15,6 @@ import { gettitle } from "../../assets/ts/helpers";
 export default {
   props: {
     anime: {
-      id: String,
       title: {
         english: String,
         native: String,
@@ -23,7 +22,6 @@ export default {
       },
       coverImage: String
     },
-    id: String,
     number: Number,
     title: !String,
     createdAt: String

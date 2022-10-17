@@ -5,7 +5,7 @@
       <nuxt-link :nuxt-child-key="episode.id" :to="`/watch/${episode.anime.slug}/${episode.number}`" :key="episode.id"
         v-for="(episode, index) in recent" class="p-0 m-0">
         <episode-card :key="episode.id" :anime="episode.anime" :title="episode.title" :id="episode.id"
-          :number="episode.number" :createdAt="episode.createdAt" />
+          :number="episode.number" :createdAt="episode.createdAt" :image="episode.image" />
       </nuxt-link>
     </div>
   </arrows>
@@ -44,9 +44,7 @@
   }
   load();
 
-  watch(data, () => {
-    load();
-  });
+  watch(data, load);
 
   async function scroll(e: Event) {
     const eps = e.target as HTMLElement;
@@ -72,11 +70,6 @@
 </script>
 
 <style scoped>
-
-  /* Removes scrollbars, across chrome and ff */
-  .overflow-x-scroll::-webkit-scrollbar {
-    display: none;
-  }
   .overflow-x-scroll {
     scrollbar-width: none;
   }
