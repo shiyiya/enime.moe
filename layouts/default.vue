@@ -20,8 +20,11 @@
         </div>
       </div>
       <div ref="searchbarRef" class="m-auto hidden bruh">
-        <input @keyup.enter="search" @keyup="searchtype" ref="fullsearchRef" placeholder="Search"
-          class="p-2 px-4 text-4xl w-full" />
+        <div>
+          <input @keyup.enter="search" @keyup="searchtype" ref="fullsearchRef" placeholder="Search"
+            class="p-2 px-4 text-4xl w-full" />
+          <div></div>
+        </div>
         <div class="divider" ref="searchdivider" v-if="results.length"></div>
         <!-- <div class="text-tertiary ml-4 text-lg" v-if="histresults.length">HISTORY</div>
         <nuxt-link :to="`/search/${result.title.userPreferred}`" class="searchresultlink history"
@@ -34,7 +37,7 @@
           <p class="searchresulttitle text-xl">{{ result.title.userPreferred }}</p>
         </nuxt-link>
         <div class="text-tertiary ml-4 text-lg" v-if="results.length">ANIME</div> -->
-        <nuxt-link :to="`/anime/${result.slug}`" tabindex="0" class="searchresultlink anime" v-for="result in results"
+        <nuxt-link :to="`/anime/${result.slug}`" @onclick="fn2()" tabindex="0" class="searchresultlink anime" v-for="result in results"
           :key="result.id">
           <div class="searchresultimg h-10 aspect-video bg-cover bg-center"
             :style="{ backgroundImage: `url(${result.coverImage})` }"></div>
@@ -110,13 +113,14 @@ import { nextTick, onMounted, ref, useRuntimeConfig } from '#imports';
   const searchtype = (e) => {
     document.removeEventListener("click", fn);
     document.removeEventListener("click", fn2);
+    
+    // If you click anywhere outside the searchbar, it will close the results thing
     document.addEventListener("click", fn2 = function(event) {
-      if (event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement?.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")){
-        return;
-      }
+      if (event.target.classList.contains("searchtext") || event.target.classList.contains("bruh") || event.target.parentElement?.classList.contains("bruh") || event.target.parentElement.parentElement.classList.contains("bruh")) return;
       results.value = [];
       // histresults.value = [];
     });
+
     if(!e.target.value) document.addEventListener("click", fn);
     // if(e.target.value)
     //   histresults.value = pastsearches.value.filter(s => s.includes(e.target.value)).map(s => {
@@ -159,7 +163,8 @@ import { nextTick, onMounted, ref, useRuntimeConfig } from '#imports';
 
   onMounted(() => {
      document.addEventListener("keydown", function (event) {
-       if(event.ctrlKey && event.key === 'k') {
+      if (event.key === "Escape" && fn) fn({});
+      if (event.ctrlKey && event.key === 'k') {
          event.preventDefault();
 
          if(fn) fn({});

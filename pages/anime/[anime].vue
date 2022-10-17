@@ -19,6 +19,16 @@
         </button>
         <p class="desc-text pt-2" v-html="description.replace(/(?:<br>\s*)+/g, `<br>`)"></p>
       </div>
+      <arrows>
+        <div ref="eps" class="flex flex-row flex-nowrap items-center m-0 overflow-x-scroll w-full pr-5 pl-5 eparrows">
+          <nuxt-link no-prefetch :to="`/watch/${anime.slug}/${ep.number}`" v-for="ep in episodes" :key="ep.id">
+            <div class="eps px-2">
+              <episode-list-item :anime="anime" :number="ep.number" :image="ep.image" :airedAt="ep.airedAt"
+                          :title="ep.title" :createdAt="ep.createdAt" />
+            </div>
+          </nuxt-link>
+        </div>
+      </arrows>
     </div>
   </div>
 </template>
@@ -52,7 +62,7 @@
     throw createError({ statusCode: 404, message: "Anime not found" });
 
   const anime = animeData.value;
-  const { title, slug, bannerImage, coverImage, description, status, currentEpisode, color } = anime;
+  const { title, slug, bannerImage, coverImage, description, status, currentEpisode, color, episodes } = anime;
   const preferredTitle = title.userPreferred || title.english || title.romaji;
 
   function firstep() {
@@ -103,7 +113,21 @@
 <style scoped lang="scss">
 
   .banner {
-    box-shadow: inset 0 -5rem 5rem #000;
+    box-shadow: inset 0 -5rem 5rem black;
+  }
+  .eps {
+    width: 14rem;
+  }
+  .eparrows {
+    &::-webkit-scrollbar {
+      height: 2px;
+      border: 0;
+
+      &-thumb {
+        background: #fff;
+        border: 0;
+      }
+    }
   }
   .cover {
     position: absolute;

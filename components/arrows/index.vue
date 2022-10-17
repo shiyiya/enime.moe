@@ -56,6 +56,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10000000;
 }
 
 .button.disabled {
