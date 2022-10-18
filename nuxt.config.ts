@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
     build: {
-        transpile: ["vue-router",  "ufo"]
+        transpile: ["vue-router",  "ufo", "readable-stream"]
     },
 
     modules: [
@@ -49,6 +49,11 @@ export default defineNuxtConfig({
         }
     },
 
+    routeRules: {
+        "/": { swr: true },
+        "/anime/**": { swr: true }
+    },
+
     supabase: {
         url: process.env.NUXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL,
         key: process.env.NUXT_PUBLIC_SUPABASE_KEY || process.env.SUPABASE_KEY
@@ -61,12 +66,6 @@ export default defineNuxtConfig({
     link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
     ],
-
-    nitro: {
-        routes: {
-            "/": { swr: 10 * 60 }
-        }
-    },
 
     /*
     partytown: {
