@@ -4,9 +4,9 @@ specifiers:
   '@nuxt-modules/compression': ^0.1.0
   '@nuxtjs/partytown': ^1.2.1
   '@nuxtjs/supabase': ^0.1.25
-  '@oplayer/core': ^1.0.44
-  '@oplayer/hls': ^1.0.44
-  '@oplayer/ui': ^1.0.44
+  '@oplayer/core': ^1.0.47
+  '@oplayer/hls': ^1.0.47
+  '@oplayer/ui': ^1.0.47
   '@pinia/nuxt': ^0.4.2
   '@types/hls.js': ^1.0.0
   '@vueuse/core': ^8.9.4
@@ -28,9 +28,9 @@ specifiers:
 dependencies:
   '@nuxt-modules/compression': 0.1.0
   '@nuxtjs/supabase': 0.1.25
-  '@oplayer/core': 1.0.44
-  '@oplayer/hls': 1.0.44_do7u73u3f5y2xyhwrhdo52znn4
-  '@oplayer/ui': 1.0.44_@oplayer+core@1.0.44
+  '@oplayer/core': 1.0.47
+  '@oplayer/hls': 1.0.47_7l22lze6gljk45resfm6j5saly
+  '@oplayer/ui': 1.0.47_@oplayer+core@1.0.47
   '@pinia/nuxt': 0.4.2_vue@3.2.39
   hls.js: 1.2.3
   lit: 2.3.0
@@ -786,26 +786,26 @@ packages:
       - supports-color
     dev: false
 
-  /@oplayer/core/1.0.44:
-    resolution: {integrity: sha512-o/1jObJo/KodpdZ/xvUPLzOA2XCHlJx0rNhMdG3SjlOOaB/N8ocVR8yv0R84TiV6CFO1JfeG1BorECTPfMJ8Xw==}
+  /@oplayer/core/1.0.47:
+    resolution: {integrity: sha512-qajrXCDggK0Yb+MQFn3o65nn+och+j7mkVQvOjBEseIhPFY5CQn+iAKtOo/ZB7Pf5SqTT5bIHbfBY9VoCNsTPg==}
     dev: false
 
-  /@oplayer/hls/1.0.44_do7u73u3f5y2xyhwrhdo52znn4:
-    resolution: {integrity: sha512-PgU8WCpkk/RXOcWnZHG5yV7HURxgMGIWOClCMrciIWFrtw8Z9PTy9iVPreAuxUN4LFmydwujTap/5coGKx0dsA==}
+  /@oplayer/hls/1.0.47_7l22lze6gljk45resfm6j5saly:
+    resolution: {integrity: sha512-CY1snQNW8YpP7rI6Hs31iho/DZHv6pQTuWiuRPz5M1Ip1KSB9fkJdgqx6shep/vCJE0nEW8A+UOk0PuvlneZ9w==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
       hls.js: '*'
     dependencies:
-      '@oplayer/core': 1.0.44
+      '@oplayer/core': 1.0.47
       hls.js: 1.2.3
     dev: false
 
-  /@oplayer/ui/1.0.44_@oplayer+core@1.0.44:
-    resolution: {integrity: sha512-M0HuMJ+F1v+XWjHZe4Jk3z+0D6gVf5CTMOKi7f0/kn9OQx3kVwr6DX2w3tnwAqdPx3TaxRvP6vS1fDYOgSVu2w==}
+  /@oplayer/ui/1.0.47_@oplayer+core@1.0.47:
+    resolution: {integrity: sha512-QB2VjgZBmr6tCDneiDZmsjJOoRNRpMwV4/ujwhIOILSEzQzu7WHBY9/4ZULnl6rg0E2tdJoneQdWY2HmkellcQ==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
     dependencies:
-      '@oplayer/core': 1.0.44
+      '@oplayer/core': 1.0.47
     dev: false
 
   /@pinia/nuxt/0.4.2_vue@3.2.39:
