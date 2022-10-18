@@ -73,6 +73,10 @@ export default defineNuxtConfig({
     },
      */
 
+    experimental: {
+        writeEarlyHints: false
+    },
+
     app: {
         head: {
             script: [
