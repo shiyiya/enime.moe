@@ -2,7 +2,6 @@
   <Html>
     <Head>
       <Title>Enime</Title>
-      <Script v-if="production" async src="https://arc.io/widget.min.js#ZGU5XFjQ"/>
       <Link rel="icon" href="/favicon.ico"/>
     </Head>
 
