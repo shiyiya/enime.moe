@@ -101,7 +101,7 @@ if (error.value || !episode.value) {
 }
 
 const { id, description, number, anime, title, sources, image, createdAt } = episode.value;
-const animeeps = anime.episodes.filter(e => e.sources?.length).sort((a, b) => a.number - b.number);
+const animeeps = anime.episodes.sort((a, b) => a.number - b.number);
 const preferredTitle = gettitle(anime.title);
 
 useHead({
