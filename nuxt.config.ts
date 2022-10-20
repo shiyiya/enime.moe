@@ -11,7 +11,6 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "nuxt-storm",
         "@nuxtjs/supabase",
-        "@nuxt/image-edge"
         // "@nuxtjs/partytown"
     ],
 

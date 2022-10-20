@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="mx-2">
-      <p class="font-bold mx-8 text-4xl mt-10">Recently Released</p>
-      <recent-release/>
-    </div>
+    <p class="font-bold text-4xl mt-10">Recently Released</p>
+    <recent-release/>
   </div>
 </template>
 
@@ -17,4 +15,7 @@ export default {
 
 </style>
 <style scoped>
+  .text-4xl {
+    margin-left: 10vw;
+  }
 </style>

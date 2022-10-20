@@ -1,6 +1,7 @@
 <template>
   <div class="cursor-pointer ms-5 mb-6 ml-3" style="width: 11rem;">
-    <nuxt-img :src="anime.coverImage" loading="lazy" class="anime-image bg-cover bg-center rounded-md mb-3"/>
+    <div class="anime-image bg-cover bg-center rounded-md mb-3"
+      :style="{ backgroundImage: `url(${anime.coverImage})` }" />
     <p class="text-sm text-tertiary text-overflow">EP{{ number }}<span v-if="title">: {{ title }}</span></p>
     <p class="text-overflow p-0 text-white anime-title">{{ gettitle(anime.title) }}</p>
   </div>

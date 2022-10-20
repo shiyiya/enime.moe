@@ -12,7 +12,6 @@
     "docker:push": "docker push enime/site:1.0"
   },
   "devDependencies": {
-    "@nuxt/image-edge": "1.0.0-27769790.4b27db3",
     "@nuxtjs/partytown": "^1.2.1",
     "@types/hls.js": "^1.0.0",
     "@vueuse/core": "^8.9.4",
