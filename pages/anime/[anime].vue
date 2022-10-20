@@ -55,14 +55,18 @@
     description: string | undefined,
     status: "RELEASING" | "FINISHED" | "CANCELLED" | "HIATUS",
     currentEpisode: number,
-    color: string | undefined
+    color: string | undefined,
+    episodes: {
+      sources: object[]
+    }[]
   }>(`${runtimeConfig.public.enimeApi}/anime/${url}`, { key: "/anime/" + url });
 
   if (error.value || !animeData.value)
     throw createError({ statusCode: 404, message: "Anime not found" });
 
   const anime = animeData.value;
-  const { title, slug, bannerImage, coverImage, description, status, currentEpisode, color, episodes } = anime;
+  let { title, slug, bannerImage, coverImage, description, status, currentEpisode, color, episodes } = anime;
+  episodes = episodes.filter(e => e.sources.length)
   const preferredTitle = title.userPreferred || title.english || title.romaji;
 
   function firstep() {

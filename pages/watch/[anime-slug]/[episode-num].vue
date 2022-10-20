@@ -2,10 +2,10 @@
   <div>
     <div class="cont my-20 items-stretch" v-if="episode">
       <div class="episode">
-        <Player v-if="!!sources" :episode="episode" :anime="anime" :sources="sources"
+        <Player v-if="sources?.length" :episode="episode" :anime="anime" :sources="sources"
           class="relative w-full aspect-video mb-8" />
         <div v-else>
-          Loading player
+          This episode does not have any source yet. Please wait for system to update.
         </div>
         <div class="m-2">
           <nuxt-link :href="`/anime/` + anime.slug">
@@ -81,7 +81,8 @@ const { error, data: episode } = await useFetch<{
     },
     slug: string,
     episodes: {
-      number: number
+      number: number,
+      sources: object[]
     }[],
     bannerImage: string | undefined,
     coverImage: string | undefined,
@@ -100,7 +101,7 @@ if (error.value || !episode.value) {
 }
 
 const { id, description, number, anime, title, sources, image, createdAt } = episode.value;
-const animeeps = anime.episodes.sort((a, b) => a.number - b.number);
+const animeeps = anime.episodes.filter(e => e.sources?.length).sort((a, b) => a.number - b.number);
 const preferredTitle = gettitle(anime.title);
 
 useHead({
