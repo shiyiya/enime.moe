@@ -20,8 +20,6 @@ export default function RootLayout({
   return (
     <html>
       <head>
-          <title>Enime</title>
-          <link rel="icon" href="/favicon.ico"/>
       </head>
       <body>
         <div className="bg-black text-white h-screen w-screen flex flex-col">
