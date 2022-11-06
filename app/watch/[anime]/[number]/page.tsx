@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import NextLink from 'next/link';
 import { title } from '@/lib/helper';
 import EpisodeListItem from '@/components/episode-list-item';
-import { Suspense } from 'react';
 
 export default async function Watch({ params }) {
     const episode = await (await fetch(enimeApi + `/view/${params.anime}/${params.number}`, { next: { revalidate: 600 }})).json();
