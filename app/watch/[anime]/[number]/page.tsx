@@ -14,9 +14,7 @@ export default async function Watch({ params }) {
     return (
         <div className={classNames(styles.cont, "my-20 items-stretch")}>
             <div className={classNames(styles.episode)}>
-                <Suspense fallback={<div>Loading</div>}>
-                    <EnimePlayer className="relative w-full aspect-video mb-8" episode={episode}/>
-                </Suspense>
+                <EnimePlayer className="relative w-full aspect-video mb-8" episode={episode}/>
                 <div className="m-2">
                     <NextLink href={`/anime/${episode.anime.slug}`}>
                         <p className="text-3xl">{ title(episode.anime.title) }</p>
