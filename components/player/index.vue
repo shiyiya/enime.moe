@@ -39,9 +39,10 @@ const posterRaw = props.episode.image;
 const poster = !posterRaw ? undefined : `https://images.weserv.nl/?url=${posterRaw}`;
 
 onMounted(() => {
+  console.log("ASD")
   const player = Player.make(playerContainerRef.value, {
     source: {
-      src: sourceRef.value.url,
+      src: sourceRef.value.website === "https://zoro.to" ? `https://cors.proxy.consumet.org/${sourceRef.value.url}` : sourceRef.value.url,
       ...(!!poster && {
         poster: poster
       })

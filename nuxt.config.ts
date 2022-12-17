@@ -2,22 +2,14 @@ import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
     build: {
-        transpile: ["vue-router",  "ufo", "readable-stream"]
+        transpile: ["ufo", "readable-stream"]
     },
 
     modules: [
         "nuxt-windicss",
-        "@vueuse/nuxt",
         "@pinia/nuxt",
-        "nuxt-storm",
         "@nuxtjs/supabase",
         // "@nuxtjs/partytown"
-    ],
-
-    buildModules: [
-        ["@nuxt-modules/compression", {
-            algorithm: "brotliCompress"
-        }]
     ],
 
     components: true,
