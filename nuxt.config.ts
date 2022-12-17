@@ -14,8 +14,6 @@ export default defineNuxtConfig({
 
     components: true,
 
-    ssr: true,
-
     css: [
         "virtual:windi-base.css",
         "virtual:windi-components.css",
@@ -64,10 +62,6 @@ export default defineNuxtConfig({
         forward: ["dataLayer.push"],
     },
      */
-
-    experimental: {
-        writeEarlyHints: false
-    },
 
     app: {
         head: {
