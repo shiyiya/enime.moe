@@ -19,8 +19,6 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head>
-      </head>
       <body>
         <div className="bg-black text-white h-screen w-screen flex flex-col">
             <TopNavigation/>

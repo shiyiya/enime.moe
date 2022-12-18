@@ -29,6 +29,7 @@ export default function EnimePlayer(props) {
     useEffect(() => {
         if (source) {
             const plugins = [ui({
+                pictureInPicture: true,
                 subtitle: {
                     source: source.subtitle ? [
                         {
