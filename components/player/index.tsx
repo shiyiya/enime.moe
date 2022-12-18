@@ -6,6 +6,7 @@ import { Episode, Source } from '@/lib/types';
 import Player from '@oplayer/core';
 import ui from '@oplayer/ui';
 import hls from '@oplayer/hls';
+import { sourceUrlToName } from '@/lib/helper';
 
 export default function EnimePlayer(props) {
     const { sources, image } = props.episode as Episode;
@@ -22,48 +23,52 @@ export default function EnimePlayer(props) {
         fetch(enimeApi + `/source/${sources[sourceIndex].id}`)
             .then(res => res.json())
             .then(res => {
-                setSource(res);
+                setSource({
+                    ...res,
+                    url: sources[sourceIndex].url.includes("zoro") ? `https://cors.proxy.consumet.org/${res.url}` : res.url
+                });
             });
     }, [sourceIndex]);
 
     useEffect(() => {
         if (source) {
-            const plugins = [ui({
-                pictureInPicture: true,
-                subtitle: {
-                    source: source.subtitle ? [
-                        {
-                            default: true,
-                            src: source.subtitle
-                        }
-                    ] : [],
-                    fontSize: 30
-                },
-                menu: [
-                    {
-                        name: "Source",
-                        children: sources.map(source => {
-                            return {
-                                name: source.url.includes("gogoanime") ? "Gogoanime" : "Zoro",
-                                default: source.url.includes("gogoanime"),
-                                value: source.id
-                            }
-                        }),
-                        onChange({ value }) {
-                            setSourceIndex(sources.findIndex(source => source.id === value));
-                        },
-                        onClick() {
-                        }
-                    }
-                ]
-            }), hls({
-                options: {
-                    hlsQualityControl: true,
-                    hlsQualitySwitch: "immediate"
-                }
-            })];
-
             if (!playerRef.current) {
+                const plugins = [ui({
+                    pictureInPicture: true,
+                    subtitle: {
+                        source: source.subtitle ? [
+                            {
+                                default: true,
+                                src: source.subtitle,
+                                name: "English"
+                            }
+                        ] : [],
+                        fontSize: 30
+                    },
+                    menu: [
+                        {
+                            name: "Source",
+                            children: sources.map(source => {
+                                return {
+                                    name: sourceUrlToName(source.url),
+                                    default: source.url.includes("gogoanime"),
+                                    value: source.id
+                                }
+                            }),
+                            onChange({ value }) {
+                                setSourceIndex(sources.findIndex(source => source.id === value));
+                            },
+                            onClick() {
+                            }
+                        }
+                    ]
+                }), hls({
+                    options: {
+                        hlsQualityControl: true,
+                        hlsQualitySwitch: "immediate"
+                    }
+                })];
+
                 playerRef.current = Player.make(playerContainerRef.current, {
                     source: {
                         src: source.url,

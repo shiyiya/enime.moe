@@ -15,3 +15,7 @@ export function title (title: Anime["title"]) {
 }
 
 export const jsonFetcher = (url) => fetch(url).then(res => res.json());
+
+export const sourceUrlToName = (url) => {
+    return url.includes("gogoanime") ? "Gogoanime" : "Zoro"
+}
