@@ -11,6 +11,7 @@ import DiscordIcon from '@/public/icons/discord.png';
 import styles from './app.module.scss';
 import classNames from 'classnames';
 import TopNavigation from '@/components/navigation/top';
+import NextScript from 'next/script';
 
 export default function RootLayout({
   children,
@@ -19,6 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <head>
+          <NextScript strategy="afterInteractive" src="https://arc.io/widget.min.js#ZGU5XFjQ"></NextScript>
+      </head>
       <body>
         <div className="bg-black text-white h-screen w-screen flex flex-col">
             <TopNavigation/>
