@@ -3,9 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@netlify/plugin-nextjs': 4.29.3-appdir.0
   '@next/font': ^13.0.7
-  '@oplayer/core': ^1.2.0
-  '@oplayer/hls': ^1.2.0
-  '@oplayer/ui': ^1.2.0
+  '@oplayer/core': ^1.2.1
+  '@oplayer/hls': ^1.2.1
+  '@oplayer/ui': ^1.2.1
   '@types/node': 18.11.8
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -25,9 +25,9 @@ specifiers:
 
 dependencies:
   '@next/font': 13.0.7
-  '@oplayer/core': 1.2.0
-  '@oplayer/hls': 1.2.0_rebvxuqqvqsm7hazzsgn3ghugy
-  '@oplayer/ui': 1.2.0_@oplayer+core@1.2.0
+  '@oplayer/core': 1.2.1
+  '@oplayer/hls': 1.2.1_gvjd7rryl63afdypuxv5acu7n4
+  '@oplayer/ui': 1.2.1_@oplayer+core@1.2.1
   '@types/node': 18.11.8
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -469,26 +469,26 @@ packages:
       fastq: 1.14.0
     dev: true
 
-  /@oplayer/core/1.2.0:
-    resolution: {integrity: sha512-xN5PIvHf9OXMUlMrGC6fChGF3/aJcWRQiSktvkvYs6TTfuTjkmOChfiJosAj07LtcB9/10L/JgOVUPPZvb5YFg==}
+  /@oplayer/core/1.2.1:
+    resolution: {integrity: sha512-pHqaLxVAd70ft9eC+lKmT16zr1u6M/TIxtJW+EF5ZwhTZpu5pIM0cgsHuvAK0OQQZzoAa/Le02XxgJuUGxFJ7Q==}
     dev: false
 
-  /@oplayer/hls/1.2.0_rebvxuqqvqsm7hazzsgn3ghugy:
-    resolution: {integrity: sha512-XaaeIbSBsT35IXHhp2b+khhTxfRjuOpRAvHfr4MfC3YTEETU79avKATEeiqhndLbR4ADNmfjd+PF02b1y//ipw==}
+  /@oplayer/hls/1.2.1_gvjd7rryl63afdypuxv5acu7n4:
+    resolution: {integrity: sha512-JLHUtrWwXwK7pQyOxr9x5BsHW8aIFvu6aHXj0owZQFADB9mCDx2E/YQuvrHxwgIKoAZG/TzxIlEwwNsRmVA7NA==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
       hls.js: '*'
     dependencies:
-      '@oplayer/core': 1.2.0
+      '@oplayer/core': 1.2.1
       hls.js: 1.2.9
     dev: false
 
-  /@oplayer/ui/1.2.0_@oplayer+core@1.2.0:
-    resolution: {integrity: sha512-C4fSUznT8Rq9xlk7hnVc4EEZFRWjQOfLAdhEPx13gsxh4NZsU60yI/PJcXzr9gAKVzPHVZp5HnEmUJVmHOBTGQ==}
+  /@oplayer/ui/1.2.1_@oplayer+core@1.2.1:
+    resolution: {integrity: sha512-rw4+tx+uZrZ/dYsVgF2Khd1cKGH0DlEOpptRbca6I7v+Er3cejxLiKPBkFuDv3BTWai3E9MC0JyydmQ4+vVxdA==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
     dependencies:
-      '@oplayer/core': 1.2.0
+      '@oplayer/core': 1.2.1
     dev: false
 
   /@swc/helpers/0.4.14:

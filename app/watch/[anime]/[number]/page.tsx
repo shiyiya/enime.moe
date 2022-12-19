@@ -20,7 +20,7 @@ export default async function Watch({ params }) {
                 <EnimePlayer className="relative w-full aspect-video mb-8" episode={episode}/>
                 <div className="m-2">
                     <NextLink href={`/anime/${episode.anime.slug}`} prefetch={false}>
-                        <p className="text-3xl">{ title(episode.anime.title) }</p>
+                        <span className="text-3xl">{ title(episode.anime.title) }</span>
                     </NextLink>
                     <p className="text-xl text-tertiary">
                         Episode { episode.number }{ episode.title && <span>: { episode.title }</span> }
@@ -33,7 +33,7 @@ export default async function Watch({ params }) {
                 <div className={classNames(styles.nextEps, "flex flex-col py-3 p-0 m-0 justify-start overflow-y-auto w-full")}>
                     {episode.anime.episodes.map(ep => {
                         return (
-                            <NextLink key={ep.id} href={`/watch/${episode.anime.slug}/${ep.number}`} prefetch={false}>
+                            <NextLink key={ep.id} href={`/watch/[anime]/[number]/`} as={`/watch/${episode.anime.slug}/${ep.number}`} prefetch={false}>
                                 <div className={classNames(styles["next-ep"], "w-full px-1 py-2 relative")}>
                                     <EpisodeListItem episode={ep}/>
                                     {ep.number === episode.number && <div className={classNames(styles.currenttext, "absolute top-0 right-0 left-0 bottom-0 bg-[#000000b0] font-bold text-5xl")}>

@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@next/font": "^13.0.7",
-    "@oplayer/core": "^1.2.0",
-    "@oplayer/hls": "^1.2.0",
-    "@oplayer/ui": "^1.2.0",
+    "@oplayer/core": "^1.2.1",
+    "@oplayer/hls": "^1.2.1",
+    "@oplayer/ui": "^1.2.1",
     "@types/node": "18.11.8",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",

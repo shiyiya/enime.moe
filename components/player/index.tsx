@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import { enimeApi } from '@/lib/constant';
 import { useEffect, useRef, useState } from 'react';
-import { Episode, Source } from '@/lib/types';
+import { Episode } from '@/lib/types';
 import Player from '@oplayer/core';
 import ui from '@oplayer/ui';
 import hls from '@oplayer/hls';
@@ -20,94 +20,83 @@ export default function EnimePlayer(props) {
     const poster = !image ? undefined : `https://images.weserv.nl/?url=${image}`;
 
     useEffect(() => {
+        if (playerRef.current) return;
+        playerRef.current = Player.make(playerContainerRef.current)
+            .use([
+                ui({
+                    pictureInPicture: true,
+                    subtitle: {
+                        source: [],
+                        fontSize: 30
+                    },
+                    menu: [
+                        {
+                            name: 'Source',
+                            children: sources.map((source) => {
+                                return {
+                                    name: sourceUrlToName(source.url),
+                                    default: source.url.includes('gogoanime'),
+                                    value: source.id
+                                }
+                            }),
+                            onChange({ value }) {
+                                setSourceIndex(sources.findIndex((source) => source.id === value));
+                            },
+                        }
+                    ]
+                }),
+                hls({
+                    options: {
+                        hlsQualityControl: true,
+                        hlsQualitySwitch: 'immediate',
+                    }
+                })
+            ])
+            .create()
+            .on(['error', 'pluginerror'], ({ type, payload }) => {
+                if (payload?.fatal) {
+                    setSourceIndex(sourceIndex + 1);
+                }
+            });
+    }, []);
+
+    useEffect(() => {
         fetch(enimeApi + `/source/${sources[sourceIndex].id}`)
-            .then(res => res.json())
-            .then(res => {
+            .then((res) => res.json())
+            .then((res) => {
                 setSource({
                     ...res,
-                    url: sources[sourceIndex].url.includes("zoro") ? `https://cors.proxy.consumet.org/${res.url}` : res.url
+                    url: sources[sourceIndex].url.includes('zoro')
+                        ? `https://cors.proxy.consumet.org/${res.url}`
+                        : res.url,
                 });
             });
     }, [sourceIndex]);
 
     useEffect(() => {
         if (source) {
-            if (!playerRef.current) {
-                const plugins = [ui({
-                    pictureInPicture: true,
-                    subtitle: {
-                        source: source.subtitle ? [
-                            {
-                                default: true,
-                                src: source.subtitle,
-                                name: "English"
-                            }
-                        ] : [],
-                        fontSize: 30
-                    },
-                    menu: [
-                        {
-                            name: "Source",
-                            children: sources.map(source => {
-                                return {
-                                    name: sourceUrlToName(source.url),
-                                    default: source.url.includes("gogoanime"),
-                                    value: source.id
-                                }
-                            }),
-                            onChange({ value }) {
-                                setSourceIndex(sources.findIndex(source => source.id === value));
-                            },
-                            onClick() {
-                            }
-                        }
-                    ]
-                }), hls({
-                    options: {
-                        hlsQualityControl: true,
-                        hlsQualitySwitch: "immediate"
-                    }
-                })];
+            playerRef.current.changeSource({
+                src: source.url,
+                ...(poster && {
+                    poster: poster,
+                }),
+            });
 
-                playerRef.current = Player.make(playerContainerRef.current, {
-                    source: {
-                        src: source.url,
-                        ...(poster && {
-                            poster: poster
-                        })
-                    }
-                })
-                    .use(plugins)
-                    .create()
-                    .on(["error", "pluginerror"], ({ type, payload }) => {
-                        if (payload?.fatal) {
-                            setSourceIndex(sourceIndex + 1);
-                        }
-                    })
-            } else {
-                playerRef.current.changeSource({
-                    src: source.url,
-                    ...(poster && {
-                        poster: poster
-                    })
-                }).then(() => {
-                    if (source.subtitle) {
-                        playerRef.current.plugins.ui.subtitle.updateSource([
-                            {
-                                default: true,
-                                src: source.subtitle,
-                                name: "English"
-                            }
-                        ])
-                    }
-                });
+            if (source.subtitle) {
+                playerRef.current.plugins.ui.subtitle.updateSource([
+                    {
+                        default: true,
+                        src: source.subtitle,
+                        name: 'English',
+                    },
+                ]);
             }
         }
     }, [source]);
 
     return (
         <div className={props.className}>
-            <div className="w-full h-full p-0 m-0" ref={playerContainerRef}/>
+            <div className="w-full h-full p-0 m-0" ref={playerContainerRef} />
         </div>
     )
 }
