@@ -92,13 +92,13 @@ export default function EnimePlayer(props) {
                     })
                 }).then(() => {
                     if (source.subtitle) {
-                        playerRef.current.emit("subtitlechange", [
+                        playerRef.current.plugins.ui.subtitle.updateSource([
                             {
                                 default: true,
                                 src: source.subtitle,
                                 name: "English"
                             }
-                        ]);
+                        ])
                     }
                 });
             }
