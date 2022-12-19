@@ -1,5 +1,6 @@
 import { enimeApi } from '@/lib/constant';
 import { title } from '@/lib/helper';
+import Arc from '@/components/arc';
 
 export default async function Head({ params }) {
     if (!params.anime || !params.number) return <></>
@@ -9,5 +10,6 @@ export default async function Head({ params }) {
 
     return <>
         <title>{`Episode ${ episode.number } ${ episode.title ? `- ${episode.title}` : "" } | ${ title(episode.anime.title) } | Enime`}</title>
+        <Arc/>
     </>
 }
