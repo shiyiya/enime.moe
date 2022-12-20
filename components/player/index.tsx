@@ -80,17 +80,17 @@ export default function EnimePlayer(props) {
                 ...(poster && {
                     poster: poster,
                 }),
+            }).then(() => {
+                if (source.subtitle) {
+                    playerRef.current.plugins.ui.subtitle.updateSource([
+                        {
+                            default: true,
+                            src: source.subtitle,
+                            name: 'English',
+                        },
+                    ]);
+                }
             });
-
-            if (source.subtitle) {
-                playerRef.current.plugins.ui.subtitle.updateSource([
-                    {
-                        default: true,
-                        src: source.subtitle,
-                        name: 'English',
-                    },
-                ]);
-            }
         }
     }, [source]);
 
