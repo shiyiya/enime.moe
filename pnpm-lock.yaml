@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@netlify/plugin-nextjs': 4.29.3-appdir.0
+  '@netlify/plugin-nextjs': ^4.29.4
   '@next/font': ^13.0.7
   '@oplayer/core': ^1.2.1
   '@oplayer/hls': ^1.2.1
@@ -44,7 +44,7 @@ dependencies:
   typescript: 4.8.4
 
 devDependencies:
-  '@netlify/plugin-nextjs': 4.29.3-appdir.0
+  '@netlify/plugin-nextjs': 4.29.4
   '@types/hls.js': 1.0.0
   autoprefixer: 10.4.13_postcss@8.4.20
   postcss: 8.4.20
@@ -291,8 +291,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@netlify/plugin-nextjs/4.29.3-appdir.0:
-    resolution: {integrity: sha512-oDI3HjknX5bXsH1BDGsbTLbf8V6eRvQRdjHOyErTKPQvFJ6+fFmeY07HYUsHovD940a/YblumK1BRk6Ah7G/dw==}
+  /@netlify/plugin-nextjs/4.29.4:
+    resolution: {integrity: sha512-tx1TSvtLa/tJUf1Z0XcToMONCYPXwPTJC1rEYJP5bh1qsBIqQxNYxKVgJOXjsBOgtmRD9l146UjbtF1a5Tockw==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@netlify/esbuild': 0.14.39
