@@ -9,7 +9,6 @@ import hls from '@oplayer/hls';
 import { sourceUrlToName } from '@/lib/helper';
 import { Highlight } from '@oplayer/ui/src/types';
 import { skipOpEd } from '@/lib/player/plugin/skip-op-ed';
-import { start } from 'repl';
 
 export default function EnimePlayer(props) {
     const { sources, number, image, anime } = props.episode as Episode;
