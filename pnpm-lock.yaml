@@ -13,7 +13,7 @@ specifiers:
   autoprefixer: ^10.4.13
   classnames: ^2.3.2
   dayjs: ^1.11.7
-  hls.js: 1.3.0-beta.2
+  hls.js: ^1.2.9
   next: 13.1.1
   postcss: ^8.4.20
   react: 18.2.0
@@ -27,14 +27,14 @@ specifiers:
 dependencies:
   '@next/font': 13.1.1
   '@oplayer/core': 1.2.3
-  '@oplayer/hls': 1.2.3_znzmwb7h36bdhyocpg6prgopfm
+  '@oplayer/hls': 1.2.3_oy4zkyk3rutwub433bxqvodvbu
   '@oplayer/ui': 1.2.4_@oplayer+core@1.2.3
   '@types/node': 18.11.8
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
   classnames: 2.3.2
   dayjs: 1.11.7
-  hls.js: 1.3.0-beta.2
+  hls.js: 1.2.9
   next: 13.1.1_3duxcpitbtplz62feflag7fwby
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -475,14 +475,14 @@ packages:
     resolution: {integrity: sha512-h2IwO9jF8LLgy8t/THAwXacDFpM7WKfbsk+wUyh/1/+zVlW4HyZq/ippDEyAVzc+TPBVY483ULXmNSFtJDGf0w==}
     dev: false
 
-  /@oplayer/hls/1.2.3_znzmwb7h36bdhyocpg6prgopfm:
+  /@oplayer/hls/1.2.3_oy4zkyk3rutwub433bxqvodvbu:
     resolution: {integrity: sha512-ij55La5S1QeduViDZUxfKUrsKp/toL3RhWsWnld8YI2GeGbGQZJd/Auona94UVcxkJACFjRf7U5o4NlhoCbDiA==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
       hls.js: '*'
     dependencies:
       '@oplayer/core': 1.2.3
-      hls.js: 1.3.0-beta.2
+      hls.js: 1.2.9
     dev: false
 
   /@oplayer/ui/1.2.4_@oplayer+core@1.2.3:
@@ -1025,11 +1025,6 @@ packages:
 
   /hls.js/1.2.9:
     resolution: {integrity: sha512-SPjm8ix0xe6cYzwDvdVGh2QvQPDkCYrGWpZu6bRaKNNVyEGWM9uF0pooh/Lqj/g8QBQgPFEx1vHzW8SyMY9rqg==}
-    dev: true
-
-  /hls.js/1.3.0-beta.2:
-    resolution: {integrity: sha512-taPYe0VIFEF7qWyzJoAZT0+JS5u5WeagsRPAbw6UicLq94yOmTNlQABWt2Kyb+w9MugmvwlZ3WAD4rv2yK8Zdg==}
-    dev: false
 
   /hotkeys-js/3.9.4:
     resolution: {integrity: sha512-2zuLt85Ta+gIyvs4N88pCYskNrxf1TFv3LR9t5mdAZIX8BcgQQ48F2opUptvHa6m8zsy5v/a0i9mWzTrlNWU0Q==}
