@@ -57,3 +57,16 @@ export type Source = {
     url: string,
     priority: number
 }
+
+export type AniSkip = {
+    statusCode: number,
+    results?: AniSkipResult[]
+}
+
+export type AniSkipResult = {
+    interval: {
+        startTime: number,
+        endTime: number
+    },
+    type: string
+}

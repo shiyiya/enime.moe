@@ -2,7 +2,7 @@
 
 import { enimeApi } from '@/lib/constant';
 import { useEffect, useRef, useState } from 'react';
-import { Episode } from '@/lib/types';
+import { AniSkip, Episode } from '@/lib/types';
 import Player from '@oplayer/core';
 import ui from '@oplayer/ui';
 import hls from '@oplayer/hls';
@@ -87,11 +87,13 @@ export default function EnimePlayer(props) {
                     fetch(`https://api.aniskip.com/v2/skip-times/${anime.mappings.mal}/${number}?types=op&types=recap&types=mixed-op&types=ed&types=mixed-ed&episodeLength=0`)
                         .then(res => res.json())
                         .then(res => {
+                            res = res as AniSkip;
+
                             const highlights: Highlight[] = []
                             let opDuration = [], edDuration = [];
 
                             if (res.statusCode === 200) {
-                                for (let result of (res.results as object[])) {
+                                for (let result of res.results) {
                                     if (result.skipType === "op" || result.skipType === "ed") {
                                         const { startTime, endTime } = result.interval;
 
