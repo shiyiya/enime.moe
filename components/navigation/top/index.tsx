@@ -11,6 +11,7 @@ import { title } from '@/lib/helper';
 import { useDebounce, useOnClickOutside } from '@/lib/hook';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { SearchResult } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 export default function TopNavigation() {
     const optsRef = useRef();
@@ -19,12 +20,14 @@ export default function TopNavigation() {
     const [searchQuery, setSearchQuery] = useState("");
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
+    const router = useRouter();
+
     const searchbarRef = useRef<HTMLDivElement>();
     useOnClickOutside(searchbarRef, () => {
         if (searching) setSearching(false);
     });
 
-    useHotkeys("ctrl+k, escape", (e, handler) => {
+    useHotkeys("ctrl+k, escape, enter", (e, handler) => {
         e.preventDefault();
         switch (handler.key) {
             case "ctrl+k":
@@ -32,12 +35,16 @@ export default function TopNavigation() {
                 break;
             case "escape":
                 if (searching) setSearching(false);
+                break;
+            case "enter":
+                setSearching(false);
+                router.push(`/search/${debouncedSearchQuery}`);
             default:
                 break;
         }
     }, { enableOnTags: ["INPUT"] }, [searching]);
 
-    const { data: searchResult, error: searchError } = useSWR<SearchResult>(debouncedSearchQuery ? enimeApi + `/search/${debouncedSearchQuery}` : null, url => fetch(url).then(r => r.json()));
+    const { data: searchResult, error: searchError } = useSWR<SearchResult>(debouncedSearchQuery ? enimeApi + `/search/${encodeURIComponent(debouncedSearchQuery)}` : null, url => fetch(url).then(r => r.json()));
 
     return (
         <div className={styles["nav-cont"]}>
