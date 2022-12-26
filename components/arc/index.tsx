@@ -1,5 +1,7 @@
+import Script from 'next/script';
+
 export default function Arc() {
     return (
-        <script async src="https://arc.io/widget.min.js#ZGU5XFjQ"></script>
+        <Script strategy="afterInteractive" src="https://arc.io/widget.min.js#ZGU5XFjQ"></Script>
     )
 }

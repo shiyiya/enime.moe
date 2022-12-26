@@ -28,7 +28,13 @@ export type Anime = {
     coverImage: string,
     bannerImage: string,
     currentEpisode: number,
-    episodes: Episode[]
+    episodes: Episode[],
+    mappings: {
+        mal?: number,
+        anidb?: number,
+        kitsu?: number,
+        anilist?: number
+    }
 }
 
 export type Episode = {

@@ -11,6 +11,7 @@ import DiscordIcon from '@/public/icons/discord.png';
 import styles from './app.module.scss';
 import classNames from 'classnames';
 import TopNavigation from '@/components/navigation/top';
+import Arc from '@/components/arc';
 
 export default function RootLayout({
   children,
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <div className="bg-black text-white h-screen w-screen flex flex-col">
+        <div className="bg-black text-white flex flex-col">
             <TopNavigation/>
             <div className="flex-grow w-screen p-0 m-0 mt-20">
                 {children}
@@ -56,6 +57,7 @@ export default function RootLayout({
             </footer>
         </div>
       </body>
+      <Arc/>
     </html>
   )
 }

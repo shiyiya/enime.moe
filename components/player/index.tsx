@@ -7,9 +7,12 @@ import Player from '@oplayer/core';
 import ui from '@oplayer/ui';
 import hls from '@oplayer/hls';
 import { sourceUrlToName } from '@/lib/helper';
+import { Highlight } from '@oplayer/ui/src/types';
+import { skipOpEd } from '@/lib/player/plugin/skip-op-ed';
+import { start } from 'repl';
 
 export default function EnimePlayer(props) {
-    const { sources, image } = props.episode as Episode;
+    const { sources, number, image, anime } = props.episode as Episode;
     const [sourceIndex, setSourceIndex] = useState(0);
 
     const playerContainerRef = useRef<HTMLDivElement>();
@@ -23,6 +26,7 @@ export default function EnimePlayer(props) {
         if (playerRef.current) return;
         playerRef.current = Player.make(playerContainerRef.current)
             .use([
+                skipOpEd(),
                 ui({
                     pictureInPicture: true,
                     subtitle: {
@@ -79,6 +83,44 @@ export default function EnimePlayer(props) {
                     poster: poster,
                 }),
             }).then(() => {
+                if (anime.mappings.mal) {
+                    fetch(`https://api.aniskip.com/v2/skip-times/${anime.mappings.mal}/${number}?types=op&types=recap&types=mixed-op&types=ed&types=mixed-ed&episodeLength=0`)
+                        .then(res => res.json())
+                        .then(res => {
+                            const highlights: Highlight[] = []
+                            let opDuration = [], edDuration = [];
+
+                            if (res.statusCode === 200) {
+                                for (let result of (res.results as object[])) {
+                                    if (result.skipType === "op" || result.skipType === "ed") {
+                                        const { startTime, endTime } = result.interval;
+
+                                        if (startTime) {
+                                            highlights.push({
+                                                time: startTime,
+                                                text: result.skipType === "op" ? "OP" : "ED"
+                                            });
+                                            if (result.skipType === "op") opDuration.push(startTime);
+                                            else edDuration.push(startTime);
+                                        }
+
+                                        if (endTime) {
+                                            highlights.push({
+                                                time: endTime,
+                                                text: result.skipType === "op" ? "OP" : "ED"
+                                            });
+                                            if (result.skipType === "op") opDuration.push(endTime);
+                                            else edDuration.push(endTime);
+                                        }
+                                    }
+                                }
+                            }
+
+                            playerRef.current.emit("opedchange", [opDuration, edDuration]);
+                            playerRef.current.plugins.ui.highlight(highlights)
+                        });
+                }
+
                 if (source.subtitle) {
                     playerRef.current.plugins.ui.subtitle.updateSource([
                         {

@@ -5,7 +5,7 @@ import { $ } from '@oplayer/core';
  * @param options [op end time, ed start time]
  * @returns PlayerPlugin
  */
-const skipOpEd = (options = []) => ({
+export const skipOpEd = () => ({
     name: 'skip-op-ed-plugin',
     apply: (player) => {
         const pos = $.css(`
@@ -18,39 +18,43 @@ const skipOpEd = (options = []) => ({
         const area = $.css(`
       color: #fff;
       background: rgba(28 ,28 ,28 , 0.9);
-      padding: 6px 20px;
+      padding: 30px 150px;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 70px;
       cursor: pointer;`)
 
         const $dom = $.create(`div.${pos}`, {}, `<div class=${area}>Skip</div>`)
 
-        const [o = -1, e = Infinity] = options
-        let duration = [o, e]
+        let durations = [];
 
         $dom.onclick = function () {
-            if (player.currentTime < duration[0]) {
-                player.seek(duration[0])
+            let [opDuration, edDuration] = durations;
+
+            if (opDuration.length && player.currentTime >= opDuration[0] && player.currentTime <= opDuration[1]) {
+                player.seek(opDuration[1]);
             }
-            if (player.currentTime > duration[1]) {
-                // 🤖 play next ep
+
+            if (edDuration.length && player.currentTime >= edDuration[0] && player.currentTime <= edDuration[1]) {
+                player.seek(edDuration[1]);
             }
         }
 
         player.on(['timeupdate', 'seeked'], () => {
-            if (player.currentTime < duration[0] || player.currentTime > duration[1]) {
-                $dom.style.display = 'block'
-            } else {
-                $dom.style.display = 'none'
-            }
+            let [opDuration, edDuration] = durations;
+
+            let timeInRange = false;
+            if ((opDuration.length && player.currentTime >= opDuration[0] && player.currentTime <= opDuration[1]) || (edDuration.length && player.currentTime >= edDuration[0] && player.currentTime <= edDuration[1])) timeInRange = true;
+
+            if (!timeInRange) $dom.style.display = "none";
+            else $dom.style.display = "block";
         })
 
         player.on('opedchange', ({ payload }) => {
-            duration = payload
+            durations = payload
         })
 
         player.on('videosourcechange', () => {
-            duration = [-1, Infinity]
+            durations = []
         })
 
         $.render($dom, player.$root)
