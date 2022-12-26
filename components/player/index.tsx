@@ -46,10 +46,8 @@ export default function EnimePlayer(props) {
                     ]
                 }),
                 hls({
-                    options: {
-                        hlsQualityControl: true,
-                        hlsQualitySwitch: 'immediate',
-                    }
+                    qualityControl: true,
+                    qualitySwitch: 'immediate',
                 })
             ])
             .create()
