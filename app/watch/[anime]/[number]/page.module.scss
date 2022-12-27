@@ -1,9 +1,6 @@
 .cont {
-  padding: 0 10vw;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  aspect-ratio: 2/.8;
+  aspect-ratio: 2 / 0.8;
 }
 .episode {
   flex: 1;
@@ -43,7 +40,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-.next-ep>p {
+.next-ep > p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
