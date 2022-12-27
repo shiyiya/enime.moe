@@ -12,7 +12,7 @@ import styles from './app.module.scss';
 import classNames from 'classnames';
 import TopNavigation from '@/components/navigation/top';
 import Arc from '@/components/arc';
-
+import { GoogleAnalytics } from '@/components/analytics';
 export default function RootLayout({
   children,
 }: {
@@ -20,6 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width" />
+      </head>
       <body>
         <div className="bg-black text-white flex flex-col">
             <TopNavigation/>
@@ -57,7 +61,8 @@ export default function RootLayout({
             </footer>
         </div>
       </body>
-      <Arc/>
+        <Arc/>
+        <GoogleAnalytics gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} trackPageViews/>
     </html>
   )
 }
