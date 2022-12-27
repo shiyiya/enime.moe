@@ -11,5 +11,8 @@ export const DEFAULT_SEO_PROPS: NextSeoProps = {
         title: "Enime",
         description: "An anime streaming site based on Enime API. Just hop in and watch with speed without VPN or ads",
         siteName: "Enime",
+    },
+    twitter: {
+        cardType: "summary_large_image"
     }
 };
