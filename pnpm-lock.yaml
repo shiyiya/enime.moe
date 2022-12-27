@@ -3,9 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@netlify/plugin-nextjs': ^4.29.5-appdir.0
   '@next/font': ^13.1.1
-  '@oplayer/core': ^1.2.4
+  '@oplayer/core': ^1.2.5
   '@oplayer/hls': ^1.2.3
-  '@oplayer/ui': ^1.2.6
+  '@oplayer/ui': ^1.2.7
   '@types/hls.js': ^1.0.0
   '@types/node': 18.11.8
   '@types/react': 18.0.24
@@ -27,9 +27,9 @@ specifiers:
 
 dependencies:
   '@next/font': 13.1.1
-  '@oplayer/core': 1.2.4
-  '@oplayer/hls': 1.2.3_kb7cilblvwmliu6qhmwevfkugy
-  '@oplayer/ui': 1.2.6_@oplayer+core@1.2.4
+  '@oplayer/core': 1.2.5
+  '@oplayer/hls': 1.2.3_4gqwlkf2e2l2f2puuutnynw4qu
+  '@oplayer/ui': 1.2.7_@oplayer+core@1.2.5
   '@types/node': 18.11.8
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -473,26 +473,26 @@ packages:
       fastq: 1.14.0
     dev: true
 
-  /@oplayer/core/1.2.4:
-    resolution: {integrity: sha512-UFXIJ7ozptFVoiVPS4pmpqOWo7NVD6cs0JFJkqO3DlEzHCAipuyJ4WXqzBQni3YVkc4yKxKV2eVtUYLQgZO1jA==}
+  /@oplayer/core/1.2.5:
+    resolution: {integrity: sha512-w3fha/VsQWie14AHm86gU8mxcSTzIpJ2teFajfZvRHm/QYua1nhcKM7YDoR77VjwetWOShMrf4x0m88vS0Dh4g==}
     dev: false
 
-  /@oplayer/hls/1.2.3_kb7cilblvwmliu6qhmwevfkugy:
+  /@oplayer/hls/1.2.3_4gqwlkf2e2l2f2puuutnynw4qu:
     resolution: {integrity: sha512-ij55La5S1QeduViDZUxfKUrsKp/toL3RhWsWnld8YI2GeGbGQZJd/Auona94UVcxkJACFjRf7U5o4NlhoCbDiA==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
       hls.js: '*'
     dependencies:
-      '@oplayer/core': 1.2.4
+      '@oplayer/core': 1.2.5
       hls.js: 1.2.9
     dev: false
 
-  /@oplayer/ui/1.2.6_@oplayer+core@1.2.4:
-    resolution: {integrity: sha512-cxqDqouh381W4nysQ4qxyiLdPZuht2oe0dXOco6VDWcRKjktmRZvVICQHiXIS/CHKvR96tTrxtrxfdLpM3uqfg==}
+  /@oplayer/ui/1.2.7_@oplayer+core@1.2.5:
+    resolution: {integrity: sha512-CWH2PGzZxTNI+r5Vq6VAfVXRhuYGkwzIAhIaraDHoYhQpNeG76a9XXUbT2zNadHj8fcegP2i2RNgH1hw4Fy/2w==}
     peerDependencies:
       '@oplayer/core': '>=1.0.0'
     dependencies:
-      '@oplayer/core': 1.2.4
+      '@oplayer/core': 1.2.5
     dev: false
 
   /@swc/helpers/0.4.14:
