@@ -2,8 +2,8 @@ import RecentReleaseComponent from '@/components/recent-release';
 import { enimeApi } from '@/lib/constant';
 import Arrow from '@/components/arrow';
 
-export default async function Page() {
-    const { data, meta } = await (await fetch(enimeApi + "/recent?perPage=100")).json();
+export default async function Home() {
+    const { data, meta } = await (await fetch(enimeApi + "/recent?perPage=100", { cache: "no-store" })).json();
 
     return (
         <>
