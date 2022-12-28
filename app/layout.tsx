@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import TopNavigation from '@/components/navigation/top';
 import Arc from '@/components/arc';
 import { GoogleAnalytics } from '@/components/analytics';
+import Ad from '@/components/ad';
 export default function RootLayout({
   children,
 }: {
@@ -23,6 +24,7 @@ export default function RootLayout({
       <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </head>
       <body>
         <div className="bg-black text-white flex flex-col">
@@ -63,6 +65,7 @@ export default function RootLayout({
       </body>
         <Arc/>
         <GoogleAnalytics gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} trackPageViews/>
+        <Ad/>
     </html>
   )
 }
