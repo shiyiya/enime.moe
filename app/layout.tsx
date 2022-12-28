@@ -25,6 +25,7 @@ export default function RootLayout({
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width" />
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+          <meta name="clckd" content="d77390e787115970577feb086c8d81cd" />
       </head>
       <body>
         <div className="bg-black text-white flex flex-col">
