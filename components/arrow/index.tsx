@@ -13,11 +13,9 @@ function ArrowIcon({ className, color }) {
 }
 
 export default function Arrow({ children }) {
-    const parentRef = useRef<HTMLDivElement>();
     const childRef = useRef<HTMLDivElement>();
 
     const scroll = (e: Element, n: number) => {
-        console.log(e)
         e.scrollTo({
             left: e.scrollLeft + n * window.innerWidth,
             behavior: "smooth"
@@ -26,14 +24,14 @@ export default function Arrow({ children }) {
     }
 
     return (
-        <div ref={parentRef} className="flex flex-row items-center mt-6 left-0 right-0 m-0 p-0 w-full mb-20">
-            <div onClick={e => scroll(childRef.current, -1)} className={classNames(styles.button, styles.left, "p-0 w-10 h-10")}>
+        <div className="flex flex-row items-center mt-6 left-0 right-0 m-0 p-0 w-full mb-20">
+            <div onClick={_ => scroll(childRef.current, -1)} className={classNames(styles.button, styles.left, "p-0 w-10 h-10")}>
                 <ArrowIcon className={styles.arrow} color="#FFF" />
             </div>
             {React.cloneElement(children, {
                 ref: childRef
             })}
-            <div onClick={e => scroll(childRef.current, 1)} className={classNames(styles.button, styles.right, "p-0 w-10 h-10")}>
+            <div onClick={_ => scroll(childRef.current, 1)} className={classNames(styles.button, styles.right, "p-0 w-10 h-10")}>
                 <ArrowIcon className={styles.arrow} color="#FFF" />
             </div>
         </div>
