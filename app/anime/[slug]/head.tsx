@@ -8,7 +8,7 @@ export default async function Head({ params }) {
 
     if (response?.statusCode === 404) return <></>
 
-    const { bannerImage, coverImage, title: animeTitle, description } = response.anime;
+    const { bannerImage, coverImage, title: animeTitle, description } = response;
 
     const meta: NextSeoProps = {
         ...DEFAULT_SEO_PROPS,
@@ -25,7 +25,7 @@ export default async function Head({ params }) {
 
     return (
         <>
-            <NextSeo {...meta}/>
+            <NextSeo useAppDir {...meta}/>
         </>
     )
 }
