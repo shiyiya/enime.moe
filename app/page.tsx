@@ -3,7 +3,7 @@ import { enimeApi } from '@/lib/constant';
 import Arrow from '@/components/arrow';
 
 export default async function Home() {
-    const { data, meta } = await (await fetch(enimeApi + "/recent?perPage=100", { cache: "no-store" })).json();
+    const { data, meta } = await (await fetch(enimeApi + "/recent?perPage=100&language=JP", { cache: "no-store" })).json();
 
     return (
         <>

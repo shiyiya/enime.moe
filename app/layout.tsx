@@ -62,10 +62,10 @@ export default function RootLayout({
                 </div>
             </footer>
         </div>
+        <Ad/>
       </body>
         <Arc/>
         <GoogleAnalytics gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} trackPageViews/>
-        <Ad/>
     </html>
   )
 }
