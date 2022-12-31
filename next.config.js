@@ -12,7 +12,8 @@ const nextConfig = {
         hostname: "**.anilist.co",
       },
     ],
-  }
+  },
+  output: "standalone"
 }
 
 module.exports = nextConfig

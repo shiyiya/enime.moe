@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t enime/site:1.0 .",
+    "docker:push": "docker push enime/site:1.0"
   },
   "dependencies": {
     "@next/font": "^13.1.1",
