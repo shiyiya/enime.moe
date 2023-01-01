@@ -12,6 +12,8 @@ import { skipOpEd } from '@/lib/player/plugin/skip-op-ed';
 
 export default function EnimePlayer(props) {
     const { sources, number, image, anime } = props.episode as Episode;
+    const setting = props.setting;
+
     const [sourceIndex, setSourceIndex] = useState(0);
 
     const playerContainerRef = useRef<HTMLDivElement>();
@@ -23,15 +25,19 @@ export default function EnimePlayer(props) {
 
     useEffect(() => {
         if (playerRef.current) return;
-        playerRef.current = Player.make(playerContainerRef.current)
+        playerRef.current = Player.make(playerContainerRef.current, {
+            volume: setting?.volume * 0.01 || 1
+        })
             .use([
                 skipOpEd(),
                 ui({
                     pictureInPicture: true,
+                    miniProgressBar: setting ? setting.miniProgressBar : true,
                     subtitle: {
                         source: [],
                         fontSize: 30
                     },
+
                     menu: [
                         {
                             name: 'Source',

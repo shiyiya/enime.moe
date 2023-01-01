@@ -34,6 +34,7 @@ export default function AdBlock() {
             className="adsbygoogle"
             style={{ width: "100%" }}
             data-ad-client="ca-pub-2103276838446130"
+            data-ad-format="auto"
         ></ins>
     )
 }

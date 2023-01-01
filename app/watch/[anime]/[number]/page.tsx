@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import NextLink from 'next/link';
 import { title } from '@/lib/helper';
 import EpisodeListItem from '@/components/episode-list-item';
+import { getSession } from '@/lib/auth';
 
 export default async function Watch({ params }) {
     if (!params.anime || !params.number) return <></>
@@ -13,6 +14,8 @@ export default async function Watch({ params }) {
     const episode = await (await fetch(enimeApi + `/view/${params.anime}/${params.number}`, { next: { revalidate: 600 }})).json();
 
     if (!episode.anime) return <></>
+
+    const session = await getSession();
 
     return (
         <div
@@ -22,7 +25,7 @@ export default async function Watch({ params }) {
             )}
         >
             <div className={classNames(styles.episode)}>
-                <EnimePlayer className="relative w-full aspect-video mb-8" episode={episode} />
+                <EnimePlayer className="relative w-full aspect-video mb-8" episode={episode} setting={session?.setting}/>
                 <div className="m-2">
                     <NextLink href={`/anime/${episode.anime.slug}`} prefetch={false}>
                         <span className="text-3xl">{title(episode.anime.title)}</span>
