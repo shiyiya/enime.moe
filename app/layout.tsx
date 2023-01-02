@@ -14,11 +14,14 @@ import TopNavigation from '@/components/navigation/top';
 import Arc from '@/components/arc';
 import { GoogleAnalytics } from '@/components/analytics';
 import Ad from '@/components/ad';
-export default function RootLayout({
+import { getSession } from '@/lib/auth';
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+    const session = await getSession();
+
   return (
     <html>
       <head>
@@ -62,7 +65,7 @@ export default function RootLayout({
                 </div>
             </footer>
         </div>
-        <Ad/>
+        {!session && <Ad/>}
       </body>
         <Arc/>
         <GoogleAnalytics gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} trackPageViews/>

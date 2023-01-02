@@ -18,6 +18,7 @@ export const authOptions = {
             delete user.setting["userId"];
 
             session.setting = user.setting;
+            session.userId = user.id;
 
             return session
         }
