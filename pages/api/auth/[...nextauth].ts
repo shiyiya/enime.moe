@@ -16,11 +16,14 @@ export const authOptions = {
         async session({ session, token, user }) {
             delete user.setting["id"];
             delete user.setting["userId"];
+            delete user.profile["id"];
+            delete user.profile["userId"];
 
             session.setting = user.setting;
+            session.profile = user.profile;
             session.userId = user.id;
 
-            return session
+            return session;
         }
     }
 }

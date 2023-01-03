@@ -45,11 +45,21 @@ model User {
   image         String?
 
   setting       Setting?
+  profile       Profile?
 
   accounts      Account[]
   sessions      Session[]
 
   @@map("user")
+}
+
+model Profile {
+  id              String    @id @default(cuid())
+
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profile")
 }
 
 model Setting {

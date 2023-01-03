@@ -8,11 +8,14 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
                     ...data,
                     setting: {
                         create: {}
+                    },
+                    profile: {
+                        create: {}
                     }
             } })
         },
-        getUser: (id) => p.user.findUnique({ where: { id }, include: { setting: true } }),
-        getUserByEmail: (email) => p.user.findUnique({ where: { email }, include: { setting: true } }),
+        getUser: (id) => p.user.findUnique({ where: { id }, include: { setting: true, profile: true } }),
+        getUserByEmail: (email) => p.user.findUnique({ where: { email }, include: { setting: true, profile: true } }),
         async getUserByAccount(provider_providerAccountId) {
             const account = await p.account.findUnique({
                 where: { provider_providerAccountId },
@@ -31,7 +34,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
         async getSessionAndUser(sessionToken) {
             const userAndSession = await p.session.findUnique({
                 where: { sessionToken },
-                include: { user: { include: { setting: true } } },
+                include: { user: { include: { setting: true, profile: true } } },
             })
             if (!userAndSession) return null
             const { user, ...session } = userAndSession
