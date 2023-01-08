@@ -21,7 +21,8 @@ export default async function Watch({ params }) {
         <div
             className={classNames(
                 styles.cont,
-                'my-4 lg:my-20 items-stretch flex-col px-3.5 lg:px-[10vw] lg:py-0 lg:flex-row 1'
+                'my-4 lg:my-20 items-stretch flex-col px-3.5 lg:px-[10vw] lg:py-0 lg:flex-row 1',
+                'no-ads'
             )}
         >
             <div className={classNames(styles.episode)}>

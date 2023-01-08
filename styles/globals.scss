@@ -54,3 +54,7 @@ body {
 .overflow-x-scroll::-webkit-scrollbar {
     display: none;
 }
+
+.no-ads .google-auto-placed {
+  display: none !important;
+}
