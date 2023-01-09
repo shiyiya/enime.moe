@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect } from 'react';
+import classNames from 'classnames';
 
-export default function AdBlock() {
+export default function AdBlock({ className }) {
     useEffect(() => {
         const pushAd = () => {
             try {
@@ -31,8 +32,7 @@ export default function AdBlock() {
 
     return (
         <ins
-            className="adsbygoogle"
-            style={{ width: "100%" }}
+            className={classNames("adsbygoogle", className ?? "")}
             data-ad-client="ca-pub-2103276838446130"
             data-ad-format="auto"
         ></ins>

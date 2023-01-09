@@ -15,6 +15,7 @@ import Arc from '@/components/arc';
 import { GoogleAnalytics } from '@/components/analytics';
 import Ad from '@/components/ad';
 import { getSession } from '@/lib/auth';
+import AdBlock from '@/components/ad/block';
 export default async function RootLayout({
   children,
 }: {
@@ -32,13 +33,9 @@ export default async function RootLayout({
       <body>
         <div className="bg-black text-white flex flex-col">
           <TopNavigation />
-          <ins className="adsbygoogle w-screen p-0 m-0 h-30"
-            data-ad-client="ca-pub-2103276838446130"
-            data-ad-format="auto"></ins>
+          <AdBlock className="w-screen p-0 m-0 h-30"/>
           <div className="flex-grow w-screen p-0 m-0 mt-10 mb-10">{children}</div>
-          <ins className="adsbygoogle w-screen p-0 m-0 h-30"
-            data-ad-client="ca-pub-2103276838446130"
-            data-ad-format="auto"></ins>
+          <AdBlock className="w-screen p-0 m-0 h-30"/>
           <footer className="bg-[#222] py-10">
             <div className={classNames(styles["foot-cont"], "flex flex-row content-between")}>
               <div className={styles.disclaimer}>
