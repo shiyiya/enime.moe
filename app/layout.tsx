@@ -33,7 +33,6 @@ export default async function RootLayout({
       <body>
         <div className="bg-black text-white flex flex-col">
           <TopNavigation />
-          <AdBlock className="w-screen p-0 m-0 h-30"/>
           <div className="flex-grow w-screen p-0 m-0 mt-10 mb-10">{children}</div>
           <AdBlock className="w-screen p-0 m-0 h-30"/>
           <footer className="bg-[#222] py-10">
