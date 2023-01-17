@@ -70,9 +70,7 @@ export default function EnimePlayer(props) {
             .then((res) => {
                 setSource({
                     ...res,
-                    url: sources[sourceIndex].url.includes('zoro')
-                        ? `https://cors.proxy.consumet.org/${res.url}`
-                        : res.url,
+                    url: `https://proxy.nade.me/redirect?url=${res.url}`,
                 });
             });
     }, [sourceIndex]);

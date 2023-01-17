@@ -17,7 +17,7 @@ export default function TopNavigation() {
     const optsRef = useRef();
 
     const [searching, setSearching] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState(undefined);
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
     const router = useRouter();
@@ -38,7 +38,8 @@ export default function TopNavigation() {
                 break;
             case "enter":
                 setSearching(false);
-                router.push(`/search/${debouncedSearchQuery}`);
+                if (debouncedSearchQuery?.length)
+                    router.push(`/search/${debouncedSearchQuery}`);
             default:
                 break;
         }
@@ -93,6 +94,9 @@ export default function TopNavigation() {
                                 )
                             })}
                         </>
+                    )}
+                    {!searchResult && (
+                        <div>No Result</div>
                     )}
                 </div>
             )}
