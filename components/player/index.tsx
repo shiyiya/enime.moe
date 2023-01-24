@@ -70,7 +70,7 @@ export default function EnimePlayer(props) {
             .then((res) => {
                 setSource({
                     ...res,
-                    url: `https://proxy.nade.me/redirect?url=${res.url}`,
+                    url: `https://cdn.nade.me/redirect?url=${res.url}`,
                 });
             });
     }, [sourceIndex]);
