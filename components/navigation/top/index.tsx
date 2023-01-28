@@ -48,7 +48,7 @@ export default function TopNavigation() {
     const { data: searchResult, error: searchError } = useSWR<SearchResult>(debouncedSearchQuery ? enimeApi + `/search/${encodeURIComponent(debouncedSearchQuery)}` : null, url => fetch(url).then(r => r.json()));
 
     return (
-        <div className={styles["nav-cont"]}>
+        <div className={classNames(styles["nav-cont"], "no-ads")}>
             <div className={classNames(searching ? "hidden" : null, styles.opts, "flex items-center gap-8 h-full mx-auto relative")} ref={optsRef}>
                 <NextLink href="/" className={classNames(styles["navbar-opt"], "text-4xl")}>Explore</NextLink>
                 <div className="grid w-40">
