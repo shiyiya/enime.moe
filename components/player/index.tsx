@@ -33,11 +33,7 @@ export default function EnimePlayer(props) {
                 ui({
                     pictureInPicture: true,
                     miniProgressBar: setting ? setting.miniProgressBar : true,
-                    subtitle: {
-                        source: [],
-                        fontSize: 30
-                    },
-
+                    subtitle: { fontSize: 30 },
                     menu: [
                         {
                             name: 'Source',
@@ -57,10 +53,15 @@ export default function EnimePlayer(props) {
                 hls()
             ])
             .create()
-            .on(['error', 'pluginerror'], ({ type, payload }) => {
+            .on('error', ({ payload }) => {
                 if (payload?.fatal) {
                     setSourceIndex(sourceIndex + 1);
                 }
+            })
+            .on('videosourcechanged', () => {
+                playerRef.current.loader?.on('hlsManifestParsed', (data) => {
+                    console.log(data);
+                });
             });
     }, []);
 
