@@ -7,6 +7,11 @@ import NextLink from 'next/link';
 import { title } from '@/lib/helper';
 import EpisodeListItem from '@/components/episode-list-item';
 import { getSession } from '@/lib/auth';
+import { redirect } from 'next/navigation';
+
+const dmca = [
+    ["onimai:-i'm-now-your-sister!", [3, 2]],
+]
 
 export default async function Watch({ params }) {
     if (!params.anime || !params.number) return <></>
@@ -16,6 +21,15 @@ export default async function Watch({ params }) {
     if (!episode.anime) return <></>
 
     const session = await getSession();
+
+    if (!session) {
+        for (let d of dmca) {
+            // @ts-ignore
+            if (decodeURIComponent(params.anime) === d[0] && d[1].includes(Number.parseInt(params.number))) {
+                redirect("/");
+            }
+        }
+    }
 
     return (
         <div
