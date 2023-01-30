@@ -10,7 +10,7 @@ import { getSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 const dmca = [
-    ["onimai:-i'm-now-your-sister!", [3, 2]],
+    ["onimai:-i'm-now-your-sister!", [3, 2, 1]],
 ]
 
 export default async function Watch({ params }) {
