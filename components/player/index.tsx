@@ -69,10 +69,19 @@ export default function EnimePlayer(props) {
         fetch(enimeApi + `/source/${sources[sourceIndex].id}`)
             .then((res) => res.json())
             .then((res) => {
-                setSource({
-                    ...res,
-                    url: `https://cdn.nade.me/redirect?url=${res.url}`,
-                });
+                fetch(`https://cdn.nade.me/generate?url=${encodeURIComponent(res.url)}`, {
+                    headers: {
+                        "x-origin": "none",
+                        "x-referer": "none"
+                    }
+                })
+                    .then(r => r.text())
+                    .then(r => {
+                        setSource({
+                            ...res,
+                            url: r,
+                        });
+                    })
             });
     }, [sourceIndex]);
 
