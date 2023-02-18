@@ -72,7 +72,8 @@ export default function EnimePlayer(props) {
                 fetch(`https://cdn.nade.me/generate?url=${encodeURIComponent(res.url)}`, {
                     headers: {
                         "x-origin": "none",
-                        "x-referer": "none"
+                        "x-referer": "none",
+                        "user-agent": "Mozilla/5.0 (Linux; Android 10; SM-J810F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Mobile Safari/537.36"
                     }
                 })
                     .then(r => r.text())
